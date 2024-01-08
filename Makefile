@@ -2,11 +2,12 @@
 LIBFT_PATH      =	./Libft/
 SRC_PATH		=	./src/
 
-SRC_MAIN        =	${addprefix ${SRC_PATH},	./main.c \
-												./errors.c \
-												./parsing/parsing_main.c}
-                                
-SRC 			= ${SRC_MAIN}
+SRC		        =	${addprefix ${SRC_PATH},	main.c \
+												errors.c \
+												parsing/parsing_main.c \
+												parsing/init_map_elements.c \
+												get_next_line/get_next_line.c \
+												get_next_line/get_next_line_utils.c}
 
 OBJ             = ${SRC:.c=.o}
 
