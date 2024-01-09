@@ -12,6 +12,17 @@
 
 #include "cub.h"
 
+static bool	check_cube_elements(t_cub *cube)
+{
+	if (!cube->no || !cube->so || !cube->we || !cube->ea \
+		|| !cube->c || !cube->f || !cube->map || !cube->map[0])
+	{
+		ft_putstr_fd("cube3D: missing elements\n", 2);
+		return (false);
+	}
+	return (true);
+}
+
 static void	file_parsing(char *file, t_cub *cube)
 {
 	char	*gnl;
@@ -19,7 +30,7 @@ static void	file_parsing(char *file, t_cub *cube)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		ft_error_exit(6);
+		ft_free_exit(6, cube);
 	gnl = get_next_line(fd);
 	while (gnl)
 	{
@@ -27,7 +38,7 @@ static void	file_parsing(char *file, t_cub *cube)
 		{
 			free(gnl);
 			close(fd);
-			exit(1);
+			ft_free_exit(0, cube);
 		}
 		free(gnl);
 		gnl = get_next_line(fd);
@@ -71,7 +82,7 @@ static void	ft_initialise_cube(char *file, t_cub *cube)
 	cube->ea = NULL;
 	cube->c = NULL;
 	cube->f = NULL;
-	cube->map = ft_calloc(2, sizeof(char *));
+	cube->map = ft_calloc(1, sizeof(char *));
 	if (!cube->map)
 	{
 		ft_putstr_fd("cub3D: malloc error\n", 2);
@@ -88,4 +99,7 @@ void	parsing_main(int argc, char **argv, t_cub *cube)
 		ft_error_exit(2);
 	cub_file_check(argv[1]);
 	ft_initialise_cube(argv[1], cube);
+	if (!check_cube_elements(cube))
+		ft_free_exit(0, cube);
+	print_elements(cube);
 }

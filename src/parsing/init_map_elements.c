@@ -6,18 +6,18 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:28:21 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/08 18:37:30 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/09 12:22:34 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-static void	ft_print_map_error(char *element, bool *error)
+static void	ft_printf_map_error(char *element, bool *error)
 {
 	ft_putstr_fd("cub3D: element: ", 2);
 	ft_putstr_fd(element, 2);
 	ft_putstr_fd(" mentioned twice\n", 2);
-	error = false;
+	(*error) = false;
 }
 
 static void	retrieve_line(char *line, t_cub *cube, enum e_elem elem)
@@ -44,50 +44,51 @@ static bool	check_for_doubles(t_cub *cube, enum e_elem elem)
 	if (elem == NO)
 		if (cube->no != NULL)
 			ft_printf_map_error("NO", &error);
-	else if (elem == SO)
+	if (elem == SO)
 		if (cube->so != NULL)
 			ft_printf_map_error("SO", &error);
-	else if (elem == WE)
+	if (elem == WE)
 		if (cube->we != NULL)
 			ft_printf_map_error("WE", &error);
-	else if (elem == EA)
+	if (elem == EA)
 		if (cube->ea != NULL)
 			ft_printf_map_error("EA", &error);
-	else if (elem == C)
+	if (elem == C)
 		if (cube->c != NULL)
 			ft_printf_map_error("C", &error);
-	else if (elem == F)
+	if (elem == F)
 		if (cube->f != NULL)
 			ft_printf_map_error("F", &error);
 	return (error);
 }
 
-char	**ft_arrayadd(char *newline, char **array)
+static char	*get_elem_value(enum e_elem elem)
 {
-	char	**tmp;
-	int		i;
-
-	if (!array)
-		return (NULL);
-	i = -1;
-	tmp = ft_calloc(ft_arraylen(array) + 2, sizeof(char *));
-	if (!tmp)
-		return (NULL);
-	while (array[++i])
-		tmp[i] = ft_strdup(array[i]);
-	tmp[i] = ft_strdup(newline);
-	ft_arrayfree(array);
-	return (tmp);
+	if (elem == NO)
+		return (ft_strdup("NO"));
+	if (elem == SO)
+		return (ft_strdup("SO"));
+	if (elem == WE)
+		return (ft_strdup("WE"));
+	if (elem == EA)
+		return (ft_strdup("EA"));
+	if (elem == C)
+		return (ft_strdup("C"));
+	if (elem == F)
+		return (ft_strdup("F"));
+	return (NULL);
 }
 
 bool	allocate_line(char *line, t_cub *cube)
 {
 	enum e_elem	elem;
+	char		*elem_value;
 
 	elem = 0;
-	while (elem < 5)
+	while (elem < 6)
 	{
-		if (!ft_strncmp(line, elem, ft_strlen(elem)))
+		elem_value = get_elem_value(elem);
+		if (!ft_strncmp(line, elem_value, ft_strlen(elem_value)))
 		{
 			if (!check_for_doubles(cube, elem))
 				return (false);
@@ -95,10 +96,10 @@ bool	allocate_line(char *line, t_cub *cube)
 				retrieve_line(line, cube, elem);
 			break ;
 		}
+		free(elem_value);
 		elem++;
 	}
-	if (line contient 1 ou 0) //a travailler dessus demain matin à Starbucks
-	{
+	if (ft_strrchr(line, '1' || ft_strrchr(line, '0')))
 		cube->map = ft_arrayadd(line, cube->map);
-	}
+	return (true);
 }
