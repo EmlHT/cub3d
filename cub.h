@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:58:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/09 12:06:38 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/10 11:47:09 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ void	parsing_main(int argc, char **argv, t_cub *cube);
 bool	allocate_line(char *line, t_cub *cube);
 void	ft_error_exit(int error_message);
 void	ft_free_exit(int error_message, t_cub *cube);
+char	*get_elem_value(enum e_elem elem);
+int		ft_iswhitespace(int c);
+void	parse_cube(t_cub *cube);
+
 
 /***_________ GET_NEXT_LINE _________***/
 char	*get_next_line(int fd);
@@ -59,5 +63,6 @@ void	ft_arrayfree(char **array);
 
 /***_________ DEBUG TOOLS _________***/
 void	print_elements(t_cub *cube);
+void	print_map(t_cub *cube);
 
 #endif

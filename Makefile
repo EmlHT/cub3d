@@ -7,6 +7,8 @@ SRC		        =	${addprefix ${SRC_PATH},	main.c \
 												parsing/parsing_main.c \
 												parsing/init_map_elements.c \
 												parsing/array_manipulations.c \
+												parsing/ft_iswhitespace.c \
+												parsing/parsing_elements.c \
 												debug.c \
 												get_next_line/get_next_line.c \
 												get_next_line/get_next_line_utils.c}

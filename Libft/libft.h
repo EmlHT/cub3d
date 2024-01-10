@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:44:49 by ehouot            #+#    #+#             */
-/*   Updated: 2023/12/08 21:59:21 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/10 12:24:20 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ char	*ft_strjoin_path(char *s1, char *s2, bool free_first_param);
 char	*ft_strjoin_dol(char *s1, char *s2);
 char	**ft_split_bash_error(char *message, char **dest);
 char	*ft_stradd_char(char *s1, char c);
+int		ft_isspace(char c);
+char	**ft_split_isspace(char const *s);
 
 //Bonus Part:
 t_list	*ft_lstnew(void *content);

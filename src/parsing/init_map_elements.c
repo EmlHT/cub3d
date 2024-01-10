@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:28:21 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/09 12:22:34 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/10 11:46:46 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static bool	check_for_doubles(t_cub *cube, enum e_elem elem)
 	return (error);
 }
 
-static char	*get_elem_value(enum e_elem elem)
+char	*get_elem_value(enum e_elem elem)
 {
 	if (elem == NO)
 		return (ft_strdup("NO"));
@@ -79,12 +79,21 @@ static char	*get_elem_value(enum e_elem elem)
 	return (NULL);
 }
 
+static bool	is_cube_elems_complete(t_cub *cube)
+{
+	if (cube->no && cube->so && cube->we && cube->ea && cube->c && cube->f)
+		return (true);
+	return (false);
+}
+
 bool	allocate_line(char *line, t_cub *cube)
 {
 	enum e_elem	elem;
 	char		*elem_value;
+	bool		elem_fill;
 
 	elem = 0;
+	elem_fill = false;
 	while (elem < 6)
 	{
 		elem_value = get_elem_value(elem);
@@ -93,13 +102,16 @@ bool	allocate_line(char *line, t_cub *cube)
 			if (!check_for_doubles(cube, elem))
 				return (false);
 			else
+			{
 				retrieve_line(line, cube, elem);
-			break ;
+				elem_fill = true;
+				break ;
+			}
 		}
 		free(elem_value);
 		elem++;
 	}
-	if (ft_strrchr(line, '1' || ft_strrchr(line, '0')))
+	if (is_cube_elems_complete(cube) && !elem_fill)
 		cube->map = ft_arrayadd(line, cube->map);
 	return (true);
 }
