@@ -6,65 +6,77 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 11:36:32 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/10 12:41:54 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/10 18:41:14 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-// char	*ft_stradd_char(char *s1, char c)
-// {
-// 	size_t	i;
-// 	char	*dest;
-
-// 	i = -1;
-// 	if (!s1)
-// 		dest = ft_calloc(2, sizeof(char *));
-// 	else
-// 		dest = ft_calloc(ft_strlen(s1) + 2, sizeof(char *));
-// 	if (!dest)
-// 		return (NULL);
-// 	if (!s1)
-// 	{
-// 		dest[0] = c;
-// 		dest[1] = '\0';
-// 		return (dest);
-// 	}
-// 	while (s1[++i])
-// 		dest[i] = s1[i];
-// 	dest[i++] = c;
-// 	dest[i] = '\0';
-// 	free(s1);
-// 	return (dest);
-// }
-
-static bool check_textures(char *elem, char *cardinal)
+static int check_textures(char *elem, int *ret_value)
 {
 	char	**dest;
-	
+	int		fd;
+
 	dest = ft_split_isspace(elem);
-	if (!ft_strncmp(dest[0], cardinal, ft_strlen(cardinal)))
-		return (false);
-	return (true);
+	fd = open(dest[1], O_RDONLY);
+	if (fd == -1 || ft_arraylen(dest) > 2)
+	{
+		*ret_value = 6;
+		return (*ret_value);
+	}
+	close(fd);
+	free(elem);
+	elem = ft_strdup(dest[1]);
+	ft_arrayfree(dest);
+	return (*ret_value);
 }
 
-static bool check_ceiling_floor(t_cub *cube, char *elem)
+static char *check_ceiling_floor(char *elem, int *ret_value)
 {
-    
+    char	**dest;
+	int		i;
+	int		j;
+	
+	i = 0;
+	dest = ft_split_isspace(elem);
+	i = 0;
+	free(elem);
+	elem = NULL;
+	while (dest[++i])
+	{
+		j = -1;
+		while (dest[i][++j])
+		{
+			if (!ft_isdigit(dest[i][j]) && dest[i][j] != ',')
+			{
+				ft_arrayfree(dest);
+				*ret_value = 7;
+				return (NULL);
+			}
+		}
+		elem = ft_strjoin_dol(elem, dest[i]);
+	}
+	ft_arrayfree(dest);
+	return (elem);
 }
 
 void	parse_cube(t_cub *cube)
 {
-	if (!check_textures(cube->no, "NO"))
-    	ft_free_exit();
-	if (!check_textures(cube->so, "SO"))
-    	ft_free_exit();
-	if (!check_textures(cube->we, "WE"))
-    	ft_free_exit();
-	if (!check_textures(cube->ea, "EA"))
-    	ft_free_exit();
-    if (!check_ceiling_floor(cube))
-    	ft_free_exit(); 
-)
-
+	int	ret_value;
+	
+	ret_value = -1;
+	if (check_textures(cube->no, &ret_value) != -1)
+    	ft_free_exit(ret_value, cube);
+	if (check_textures(cube->so, &ret_value) != -1)
+    	ft_free_exit(ret_value, cube);
+	if (check_textures(cube->we, &ret_value) != -1)
+    	ft_free_exit(ret_value, cube);
+	if (check_textures(cube->ea, &ret_value) != -1)
+    	ft_free_exit(ret_value, cube);
+    cube->c = check_ceiling_floor(cube->c, &ret_value);
+	if (ret_value != -1)
+    	ft_free_exit(ret_value, cube);
+	cube->f = check_ceiling_floor(cube->f, &ret_value);
+	if (ret_value != -1)
+    	ft_free_exit(ret_value, cube);
 }

@@ -11,9 +11,9 @@ static char	*ft_fill(char *dest, char const *s, int i)
 	a = 0;
 	while (s[z] && a <= i)
 	{
-		while (s[z] && ft_isspace(s[z]) == 0)
+		while (s[z] && ft_isspace(s[z]))
 			z++;
-		while (s[z] && ft_isspace(s[z]) == 1)
+		while (s[z] && !ft_isspace(s[z]))
 		{
 			if (a == i)
 			{
@@ -39,9 +39,9 @@ static int	ft_count_size(char const *s, int i)
 	a = 0;
 	while (s[z] && a <= i)
 	{
-		while (s[z] && ft_isspace(s[z]) == 0)
+		while (s[z] && ft_isspace(s[z]))
 			z++;
-		while (s[z] && ft_isspace(s[z]) == 1)
+		while (s[z] && !ft_isspace(s[z]))
 		{
 			if (a == i)
 				j++;
@@ -61,11 +61,11 @@ static int	ft_count(char const *s)
 	i = 0;
 	while (s[i])
 	{
-		while (s[i] && ft_isspace(s[i]) == 0)
+		while (s[i] && ft_isspace(s[i]))
 			i++;
 		if (s[i])
 			cpt++;
-		while (s[i] && ft_isspace(s[i]) == 1)
+		while (s[i] && !ft_isspace(s[i]))
 			i++;
 	}
 	return (cpt);

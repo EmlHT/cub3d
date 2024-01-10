@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:16:36 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/10 10:40:57 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/10 16:55:38 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,17 @@ void	ft_error_exit(int error_message)
 		ft_putstr_fd("cub3D: file does not exist/access denied\n", 2);
 	else if (error_message == 4)
 		ft_putstr_fd("cub3D: map file with .cub extension necessary\n", 2);
+	else if (error_message == 5)
+		ft_putstr_fd("cub3D: Wrong element\n", 2);
 	exit(error_message);
 }
 
 void	ft_free_exit(int error_message, t_cub *cube)
 {
 	if (error_message == 6)
-		ft_putstr_fd("cub3D: file does not open\n", 2);
+		ft_putstr_fd("cub3D: texture file does not open\n", 2);
+	if (error_message == 7)
+		ft_putstr_fd("cub3D: color not valid\n", 2);
 	if (cube->map || cube->map[0])
 		ft_arrayfree(cube->map);
 	if (cube->no)

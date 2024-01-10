@@ -102,4 +102,5 @@ void	parsing_main(int argc, char **argv, t_cub *cube)
 	if (!check_cube_elements(cube))
 		ft_free_exit(0, cube);
 	parse_cube(cube);
+	print_elements(cube);
 }

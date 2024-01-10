@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:50:54 by bleclerc          #+#    #+#             */
-/*   Updated: 2024/01/08 16:33:13 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/10 17:28:05 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 	int		i;
 	int		j;
 
-	if (!s1)
-		s1 = ft_calloc(1, 1);
 	if (!s1 || !s2)
 		return (0);
 	i = -1;
