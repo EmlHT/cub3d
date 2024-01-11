@@ -2,6 +2,7 @@
 LIBFT_PATH      =	./Libft/
 SRC_PATH		=	./src/
 
+
 SRC		        =	${addprefix ${SRC_PATH},	main.c \
 												errors.c \
 												parsing/parsing_main.c \
@@ -21,7 +22,16 @@ CC              = cc
 RM              = rm -f
 
 CFLAGS          = -Wall -Werror -Wextra -g
+
+OS := ${shell uname}
+
 LINKS			= -lmlx -framework OpenGL -framework AppKit
+
+ifeq (${OS}, Darwin)
+	COMP = @$(CC) $(CFLAGS) $(LINKS) $(OBJ) ${LIBFT_PATH}libft.a -I $(HEADER) -o $(NAME)
+else
+	COMP = @$(CC) $(CFLAGS) $(OBJ) ${LIBFT_PATH}libft.a -I $(HEADER) -o $(NAME)
+endif
 
 ifdef DEBUG
         CFLAGS += -fsanitize=address -g3
@@ -36,10 +46,10 @@ all:            $(NAME)
 
 $(NAME):    	$(OBJ)
 				@${MAKE} -C ${LIBFT_PATH}
-				@$(CC) $(CFLAGS) $(LINKS) $(OBJ) ${LIBFT_PATH}libft.a -I $(HEADER) -o $(NAME)
+				$(COMP)
 
 debug:
-        		${MAKE} DEBUG=1
+	${MAKE} DEBUG=1
 
 clean:
 				@$(RM) $(OBJ)
