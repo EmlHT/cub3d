@@ -25,6 +25,7 @@ static bool	check_cube_elements(t_cub *cube)
 
 static void	file_parsing(char *file, t_cub *cube)
 {
+	bool	elem_fill;
 	char	*gnl;
 	int		fd;
 
@@ -34,7 +35,8 @@ static void	file_parsing(char *file, t_cub *cube)
 	gnl = get_next_line(fd);
 	while (gnl)
 	{
-		if (!allocate_line(gnl, cube))
+		elem_fill = false;
+		if (!allocate_line(gnl, cube, elem_fill))
 		{
 			free(gnl);
 			close(fd);
@@ -99,12 +101,11 @@ void	parsing_main(int argc, char **argv, t_cub *cube)
 	file_check(argv[1]);
 	cub_file_extension_check(argv[1]);
 	ft_initialise_cube(argv[1], cube);
-	print_elements(cube);
-	print_map(cube);
 	if (!check_cube_elements(cube))
 		ft_free_exit(0, cube);
 	parse_cube(cube);
+	parse_map(cube);
 	print_elements(cube);
 	print_colours(cube);
-	parse_map(cube);
+	print_map(cube);
 }

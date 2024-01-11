@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 11:36:32 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/11 12:18:41 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/11 17:17:52 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	check_colour_values(t_cub *cube)
 	cube->f_colours = retrieve_colour_values(cube, cube->f);
 }
 
-static int check_textures(char *elem, int *ret_value)
+static char *check_textures(char *elem, int *ret_value)
 {
 	char	**dest;
 	int		fd;
@@ -72,13 +72,14 @@ static int check_textures(char *elem, int *ret_value)
 	if (fd == -1 || ft_arraylen(dest) > 2)
 	{
 		*ret_value = 6;
-		return (*ret_value);
+		free(elem);
+		return (NULL);
 	}
 	close(fd);
 	free(elem);
 	elem = ft_strdup(dest[1]);
 	ft_arrayfree(dest);
-	return (*ret_value);
+	return (elem);
 }
 
 static char *check_ceiling_floor(char *elem, int *ret_value)
@@ -115,17 +116,13 @@ void	parse_cube(t_cub *cube)
 	int	ret_value;
 	
 	ret_value = -1;
-	if (check_textures(cube->no, &ret_value) != -1)
-    	ft_free_exit(ret_value, cube);
-	if (check_textures(cube->so, &ret_value) != -1)
-    	ft_free_exit(ret_value, cube);
-	if (check_textures(cube->we, &ret_value) != -1)
-    	ft_free_exit(ret_value, cube);
-	if (check_textures(cube->ea, &ret_value) != -1)
-    	ft_free_exit(ret_value, cube);
-    cube->c = check_ceiling_floor(cube->c, &ret_value);
+	cube->no = check_textures(cube->no, &ret_value);
+	cube->so = check_textures(cube->so, &ret_value);
+	cube->we = check_textures(cube->we, &ret_value);
+	cube->ea = check_textures(cube->ea, &ret_value);
 	if (ret_value != -1)
     	ft_free_exit(ret_value, cube);
+    cube->c = check_ceiling_floor(cube->c, &ret_value);
 	cube->f = check_ceiling_floor(cube->f, &ret_value);
 	if (ret_value != -1)
     	ft_free_exit(ret_value, cube);

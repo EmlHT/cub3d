@@ -14,6 +14,7 @@ endif
 SRC		        =	${addprefix ${SRC_PATH},	main.c \
 												errors.c \
 												parsing/parsing_main.c \
+												parsing/parsing_map.c \
 												parsing/init_map_elements.c \
 												parsing/array_manipulations.c \
 												parsing/parsing_elements.c \
