@@ -10,11 +10,16 @@ else
 	COMPILE = @$(CC) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit $(OBJ) ${LIBFT_PATH}libft.a -I $(HEADER) -o $(NAME)
 endif
 
-SRC_MAIN        =	${addprefix ${SRC_PATH},	./main.c \
-												./errors.c \
-												./parsing/parsing_main.c}
-                                
-SRC 			= ${SRC_MAIN}
+
+SRC		        =	${addprefix ${SRC_PATH},	main.c \
+												errors.c \
+												parsing/parsing_main.c \
+												parsing/init_map_elements.c \
+												parsing/array_manipulations.c \
+												parsing/parsing_elements.c \
+												debug.c \
+												get_next_line/get_next_line.c \
+												get_next_line/get_next_line_utils.c}
 
 OBJ             = ${SRC:.c=.o}
 
@@ -25,6 +30,7 @@ CC              = cc
 RM              = rm -f
 
 CFLAGS          = -Wall -Werror -Wextra -g
+LINKS			= -lmlx -framework OpenGL -framework AppKit
 
 ifdef DEBUG
         CFLAGS += -fsanitize=address -g3
@@ -39,10 +45,10 @@ all:            $(NAME)
 
 $(NAME):    	$(OBJ)
 				@${MAKE} -C ${LIBFT_PATH}
-				$(COMPILE)
+				@$(CC) $(CFLAGS) $(LINKS) $(OBJ) ${LIBFT_PATH}libft.a -I $(HEADER) -o $(NAME)
 
 debug:
-		${MAKE} DEBUG=1
+        		${MAKE} DEBUG=1
 
 clean:
 				@$(RM) $(OBJ)
