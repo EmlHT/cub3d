@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:16:36 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/10 16:55:38 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/11 12:22:29 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,11 @@ void	ft_free_exit(int error_message, t_cub *cube)
 	if (error_message == 6)
 		ft_putstr_fd("cub3D: texture file does not open\n", 2);
 	if (error_message == 7)
-		ft_putstr_fd("cub3D: color not valid\n", 2);
+		ft_putstr_fd("cub3D: invalid colour(s)\n", 2);
+	if (error_message == 8)
+		ft_putstr_fd("cub3D: incorrect colour format\n", 2);
+	if (error_message == 9)
+		ft_putstr_fd("cub3D: colour values should be >= 0 <= 255\n", 2);
 	if (cube->map || cube->map[0])
 		ft_arrayfree(cube->map);
 	if (cube->no)
@@ -47,5 +51,9 @@ void	ft_free_exit(int error_message, t_cub *cube)
 		free(cube->c);
 	if (cube->f)
 		free(cube->f);
+	if (cube->c_colours)
+		free(cube->c_colours);
+	if (cube->f_colours)
+		free(cube->f_colours);
 	exit(error_message);
 }

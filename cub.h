@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:58:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/10 11:47:09 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/11 12:18:55 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,26 @@ enum	e_elem
 	F,		// --> 5
 };
 
+typedef	struct s_colours
+{
+	int	r;
+	int	g;
+	int	b;
+}	t_colours;
+
 typedef struct s_cub
 {
-	int		i;
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	char	*c;
-	char	*f;
-	char	**map;
-	void	*mlx;
+	int			i;
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
+	char		*c;
+	char		*f;
+	char		**map;
+	void		*mlx;
+	t_colours	*c_colours;
+	t_colours	*f_colours;
 }	t_cub;
 
 void	parsing_main(int argc, char **argv, t_cub *cube);
@@ -47,7 +56,6 @@ bool	allocate_line(char *line, t_cub *cube);
 void	ft_error_exit(int error_message);
 void	ft_free_exit(int error_message, t_cub *cube);
 char	*get_elem_value(enum e_elem elem);
-int		ft_iswhitespace(int c);
 void	parse_cube(t_cub *cube);
 
 
@@ -64,5 +72,6 @@ void	ft_arrayfree(char **array);
 /***_________ DEBUG TOOLS _________***/
 void	print_elements(t_cub *cube);
 void	print_map(t_cub *cube);
+void	print_colours(t_cub *cube);
 
 #endif

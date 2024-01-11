@@ -81,6 +81,8 @@ static void	ft_initialise_cube(char *file, t_cub *cube)
 	cube->ea = NULL;
 	cube->c = NULL;
 	cube->f = NULL;
+	cube->c_colours = NULL;
+	cube->f_colours = NULL;
 	cube->map = ft_calloc(1, sizeof(char *));
 	if (!cube->map)
 	{
@@ -103,4 +105,5 @@ void	parsing_main(int argc, char **argv, t_cub *cube)
 		ft_free_exit(0, cube);
 	parse_cube(cube);
 	print_elements(cube);
+	print_colours(cube);
 }
