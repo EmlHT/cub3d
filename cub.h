@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:58:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/11 12:18:55 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/11 15:22:25 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,11 @@ typedef struct s_cub
 }	t_cub;
 
 void	parsing_main(int argc, char **argv, t_cub *cube);
-bool	allocate_line(char *line, t_cub *cube);
+bool	allocate_line(char *line, t_cub *cube, bool elem_fill);
 void	ft_error_exit(int error_message);
 void	ft_free_exit(int error_message, t_cub *cube);
+void	ft_printf_map_error(char *element, bool *error);
 char	*get_elem_value(enum e_elem elem);
-void	parse_cube(t_cub *cube);
-
 
 /***_________ GET_NEXT_LINE _________***/
 char	*get_next_line(int fd);
@@ -73,5 +72,9 @@ void	ft_arrayfree(char **array);
 void	print_elements(t_cub *cube);
 void	print_map(t_cub *cube);
 void	print_colours(t_cub *cube);
+
+/***_________ PARSING _________***/
+void    parse_map(t_cub *cube);
+void	parse_cube(t_cub *cube);
 
 #endif

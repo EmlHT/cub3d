@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:16:36 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/11 12:22:29 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/11 17:08:14 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ void	ft_free_exit(int error_message, t_cub *cube)
 		ft_putstr_fd("cub3D: incorrect colour format\n", 2);
 	if (error_message == 9)
 		ft_putstr_fd("cub3D: colour values should be >= 0 <= 255\n", 2);
+	if (error_message == 10)
+		ft_putstr_fd("cub3D: not properly closed off by walls/character placement issue\n", 2);
+	if (error_message == 11)
+		ft_putstr_fd("cub3D: invalid characters present in map\n", 2);
+	if (error_message == 12)
+		ft_putstr_fd("cub3D: issue with player position character\n", 2);
 	if (cube->map || cube->map[0])
 		ft_arrayfree(cube->map);
 	if (cube->no)
@@ -56,4 +62,12 @@ void	ft_free_exit(int error_message, t_cub *cube)
 	if (cube->f_colours)
 		free(cube->f_colours);
 	exit(error_message);
+}
+
+void	ft_printf_map_error(char *element, bool *error)
+{
+	ft_putstr_fd("cub3D: element: ", 2);
+	ft_putstr_fd(element, 2);
+	ft_putstr_fd(" mentioned twice\n", 2);
+	(*error) = false;
 }

@@ -6,19 +6,11 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:28:21 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/10 11:46:46 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/11 16:46:31 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-
-static void	ft_printf_map_error(char *element, bool *error)
-{
-	ft_putstr_fd("cub3D: element: ", 2);
-	ft_putstr_fd(element, 2);
-	ft_putstr_fd(" mentioned twice\n", 2);
-	(*error) = false;
-}
 
 static void	retrieve_line(char *line, t_cub *cube, enum e_elem elem)
 {
@@ -86,14 +78,12 @@ static bool	is_cube_elems_complete(t_cub *cube)
 	return (false);
 }
 
-bool	allocate_line(char *line, t_cub *cube)
+bool	allocate_line(char *line, t_cub *cube, bool elem_fill)
 {
 	enum e_elem	elem;
 	char		*elem_value;
-	bool		elem_fill;
 
 	elem = 0;
-	elem_fill = false;
 	while (elem < 6)
 	{
 		elem_value = get_elem_value(elem);
