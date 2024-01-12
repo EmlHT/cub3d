@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_coordinates.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 14:24:32 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/12 11:42:37 by brettlecler      ###   ########.fr       */
+/*   Created: 2024/01/12 10:00:56 by brettlecler       #+#    #+#             */
+/*   Updated: 2024/01/12 11:41:48 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int	main(int argc, char **argv)
+void	retrieve_position(t_cub *cube)
 {
-	t_cub	cube;
+	int	y;
+	int	x;
 
-	(void)argv;
-	(void)argc;
-	parsing_main(argc, argv, &cube);
-	init_coordinates(&cube);
-	printf("Player pos_x: %i\n", cube.player_pos.x);
-	printf("Player pos_y: %i\n", cube.player_pos.y);
-	//mlx_main(&cube);
-	return (0);
+	y = -1;
+	while(cube->map[++y])
+	{
+		x = -1;
+		while (cube->map[y][++x])
+		{
+			if (cube->map[y][x] == cube->player_start_dir)
+			{
+				cube->player_pos.x = x;
+				cube->player_pos.y = y;
+			}
+		}
+	}
+}
+
+void	init_coordinates(t_cub *cube)
+{
+	retrieve_position(cube);
 }

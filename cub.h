@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:58:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/11 15:22:25 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/12 11:42:56 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ typedef	struct s_colours
 	int	b;
 }	t_colours;
 
+typedef struct s_vector
+{
+	int	x;
+	int	y;
+}		t_vector;
+
 typedef struct s_cub
 {
 	int			i;
@@ -47,8 +53,10 @@ typedef struct s_cub
 	char		*f;
 	char		**map;
 	void		*mlx;
+	char		player_start_dir;
 	t_colours	*c_colours;
 	t_colours	*f_colours;
+	t_vector	player_pos;
 }	t_cub;
 
 void	parsing_main(int argc, char **argv, t_cub *cube);
@@ -57,6 +65,7 @@ void	ft_error_exit(int error_message);
 void	ft_free_exit(int error_message, t_cub *cube);
 void	ft_printf_map_error(char *element, bool *error);
 char	*get_elem_value(enum e_elem elem);
+void	init_coordinates(t_cub *cube);
 
 /***_________ GET_NEXT_LINE _________***/
 char	*get_next_line(int fd);

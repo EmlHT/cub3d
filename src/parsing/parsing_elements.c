@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 11:36:32 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/11 17:17:52 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/12 10:13:03 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,21 @@ static void	check_colour_values(t_cub *cube)
 	cube->f_colours = retrieve_colour_values(cube, cube->f);
 }
 
-static char *check_textures(char *elem, int *ret_value)
+static char *check_textures(char *elem, int *ret_value, char *elem_value)
 {
 	char	**dest;
 	int		fd;
 
 	dest = ft_split_isspace(elem);
 	fd = open(dest[1], O_RDONLY);
-	if (fd == -1 || ft_arraylen(dest) > 2)
+	if (fd == -1 || ft_arraylen(dest) > 2 \
+		|| ft_strncmp(dest[0], elem_value, ft_strlen(elem_value) + 1))
 	{
 		*ret_value = 6;
+		if (fd != -1)
+			close(fd);
 		free(elem);
+		ft_arrayfree(dest);
 		return (NULL);
 	}
 	close(fd);
@@ -113,13 +117,13 @@ static char *check_ceiling_floor(char *elem, int *ret_value)
 
 void	parse_cube(t_cub *cube)
 {
-	int	ret_value;
+	int			ret_value;
 	
 	ret_value = -1;
-	cube->no = check_textures(cube->no, &ret_value);
-	cube->so = check_textures(cube->so, &ret_value);
-	cube->we = check_textures(cube->we, &ret_value);
-	cube->ea = check_textures(cube->ea, &ret_value);
+	cube->no = check_textures(cube->no, &ret_value, "NO");
+	cube->so = check_textures(cube->so, &ret_value, "SO");
+	cube->we = check_textures(cube->we, &ret_value, "WE");
+	cube->ea = check_textures(cube->ea, &ret_value, "EA");
 	if (ret_value != -1)
     	ft_free_exit(ret_value, cube);
     cube->c = check_ceiling_floor(cube->c, &ret_value);
