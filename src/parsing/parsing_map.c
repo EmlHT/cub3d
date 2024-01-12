@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 16:22:47 by ehouot            #+#    #+#             */
-/*   Updated: 2024/01/11 17:30:14 by ehouot           ###   ########.fr       */
+/*   Updated: 2024/01/12 17:08:43 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static bool	check_wrong_char(char **map)
 	return (true);
 }
 
-static bool	check_player_loc(char **map)
+static bool	check_player_loc(char **map, t_cub *cube)
 {
 	int	y;
 	int	x;
@@ -52,7 +52,10 @@ static bool	check_player_loc(char **map)
 		{
 			if (map[y][x] == 'N' || map[y][x] == 'S' \
 				|| map[y][x] == 'E' || map[y][x] == 'W')
+			{
 				check_loc++;
+				cube->mlx.player_start_dir = map[y][x];
+			}
 			if (check_loc > 1)
 				return (false);
 		}
@@ -96,6 +99,6 @@ void    parse_map(t_cub *cube)
 		ft_free_exit(11, cube);
 	if (!check_map_closed(cube->map))
         ft_free_exit(10, cube);
-	if (!check_player_loc(cube->map))
+	if (!check_player_loc(cube->map, cube))
 		ft_free_exit(12, cube);
 }

@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:58:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/11 17:30:39 by ehouot           ###   ########.fr       */
+/*   Updated: 2024/01/12 17:08:37 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <stdio.h>
 # include "Libft/libft.h"
 # include "minilibx-linux/mlx.h"
+
+# define SCREEN_WIDTH 640
+# define SCREEN_HEIGHT 480
 
 enum	e_elem
 {
@@ -36,6 +39,22 @@ typedef	struct s_colours
 	int	b;
 }	t_colours;
 
+typedef struct s_vector
+{
+	double	x;
+	double	y;
+}		t_vector;
+
+typedef struct s_mlx
+{
+	void		*ptr;
+	void		*window;
+	char		player_start_dir;
+	t_vector	player_pos;
+	t_vector	dir;
+	t_vector	plane;
+}	t_mlx;
+
 typedef struct s_cub
 {
 	int			i;
@@ -46,9 +65,9 @@ typedef struct s_cub
 	char		*c;
 	char		*f;
 	char		**map;
-	void		*mlx;
 	t_colours	*c_colours;
 	t_colours	*f_colours;
+	t_mlx		mlx;
 }	t_cub;
 
 void	parsing_main(int argc, char **argv, t_cub *cube);
@@ -57,6 +76,7 @@ void	ft_error_exit(int error_message);
 void	ft_free_exit(int error_message, t_cub *cube);
 void	ft_printf_map_error(char *element, bool *error);
 char	*get_elem_value(enum e_elem elem);
+void	init_coordinates(t_cub *cube);
 
 /***_________ GET_NEXT_LINE _________***/
 char	*get_next_line(int fd);
@@ -76,5 +96,9 @@ void	print_colours(t_cub *cube);
 /***_________ PARSING _________***/
 void    parse_map(t_cub *cube);
 void	parse_cube(t_cub *cube);
+
+/***_________ MLX FUNCTIONS _________***/
+void	mlx_main(t_cub *cube);
+void	ft_free_mlx_ptr_cube(t_cub *cube);
 
 #endif
