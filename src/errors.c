@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:16:36 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/12 09:47:06 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/12 17:00:33 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,32 @@ void	ft_error_exit(int error_message)
 	exit(error_message);
 }
 
-void	ft_free_exit(int error_message, t_cub *cube)
+void	print_error_message(int error_message)
 {
 	if (error_message == 6)
 		ft_putstr_fd("cub3D: texture file incorrect format/does not open\n", 2);
-	if (error_message == 7)
+	else if (error_message == 7)
 		ft_putstr_fd("cub3D: invalid colour(s)\n", 2);
-	if (error_message == 8)
+	else if (error_message == 8)
 		ft_putstr_fd("cub3D: incorrect colour format\n", 2);
-	if (error_message == 9)
+	else if (error_message == 9)
 		ft_putstr_fd("cub3D: colour values should be >= 0 <= 255\n", 2);
-	if (error_message == 10)
+	else if (error_message == 10)
 		ft_putstr_fd("cub3D: not properly closed off by walls/character placement issue\n", 2);
-	if (error_message == 11)
+	else if (error_message == 11)
 		ft_putstr_fd("cub3D: invalid characters present in map\n", 2);
-	if (error_message == 12)
+	else if (error_message == 12)
 		ft_putstr_fd("cub3D: issue with player position character\n", 2);
+	else if (error_message == 13)
+		ft_putstr_fd("cub3D: mlx init error\n", 2);
+	else if (error_message == 14)
+		ft_putstr_fd("cub3D: mlx window error\n", 2);
+}
+
+void	ft_free_exit(int error_message, t_cub *cube)
+{
+	if (error_message != 0)
+		print_error_message(error_message);
 	if (cube->map || cube->map[0])
 		ft_arrayfree(cube->map);
 	if (cube->no)
@@ -70,4 +80,11 @@ void	ft_printf_map_error(char *element, bool *error)
 	ft_putstr_fd(element, 2);
 	ft_putstr_fd(" mentioned twice\n", 2);
 	(*error) = false;
+}
+
+void	ft_free_mlx_ptr_cube(t_cub *cube)
+{
+	mlx_destroy_window(cube->mlx.ptr, cube->mlx.window);
+	ft_free_exit(0, cube);
+	exit (0);
 }

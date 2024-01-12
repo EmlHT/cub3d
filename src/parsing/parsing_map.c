@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 16:22:47 by ehouot            #+#    #+#             */
-/*   Updated: 2024/01/12 11:37:56 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/12 16:05:01 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static bool	check_player_loc(char **map, t_cub *cube)
 				|| map[y][x] == 'E' || map[y][x] == 'W')
 			{
 				check_loc++;
-				cube->player_start_dir = map[y][x];
+				cube->mlx.player_start_dir = map[y][x];
 			}
 			if (check_loc > 1)
 				return (false);

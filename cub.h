@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:58:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/12 11:42:56 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/12 17:01:53 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <stdio.h>
 # include "Libft/libft.h"
 # include "minilibx-linux/mlx.h"
+
+# define SCREEN_WIDTH 640
+# define SCREEN_HEIGHT 480
 
 enum	e_elem
 {
@@ -38,9 +41,19 @@ typedef	struct s_colours
 
 typedef struct s_vector
 {
-	int	x;
-	int	y;
+	double	x;
+	double	y;
 }		t_vector;
+
+typedef struct s_mlx
+{
+	void		*ptr;
+	void		*window;
+	char		player_start_dir;
+	t_vector	player_pos;
+	t_vector	dir;
+	t_vector	plane;
+}	t_mlx;
 
 typedef struct s_cub
 {
@@ -52,11 +65,9 @@ typedef struct s_cub
 	char		*c;
 	char		*f;
 	char		**map;
-	void		*mlx;
-	char		player_start_dir;
 	t_colours	*c_colours;
 	t_colours	*f_colours;
-	t_vector	player_pos;
+	t_mlx		mlx;
 }	t_cub;
 
 void	parsing_main(int argc, char **argv, t_cub *cube);
@@ -85,5 +96,9 @@ void	print_colours(t_cub *cube);
 /***_________ PARSING _________***/
 void    parse_map(t_cub *cube);
 void	parse_cube(t_cub *cube);
+
+/***_________ MLX FUNCTIONS _________***/
+void	mlx_main(t_cub *cube);
+void	ft_free_mlx_ptr_cube(t_cub *cube);
 
 #endif

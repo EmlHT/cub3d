@@ -11,6 +11,7 @@ SRC		        =	${addprefix ${SRC_PATH},	main.c \
 												parsing/init_coordinates.c \
 												parsing/array_manipulations.c \
 												parsing/parsing_elements.c \
+												raycasting/mlx_main.c \
 												debug.c \
 												get_next_line/get_next_line.c \
 												get_next_line/get_next_line_utils.c}
