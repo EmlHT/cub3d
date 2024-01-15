@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:58:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/12 17:01:53 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/15 18:44:13 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <math.h>
 # include "Libft/libft.h"
 # include "minilibx-linux/mlx.h"
 
@@ -32,6 +33,14 @@ enum	e_elem
 	F,		// --> 5
 };
 
+typedef struct s_img
+{
+    void	*mlx_img;
+    char	*addr;
+    int		bpp;
+    int		line_len;
+    int		endian;
+}	t_img;
 typedef	struct s_colours
 {
 	int	r;
@@ -45,14 +54,33 @@ typedef struct s_vector
 	double	y;
 }		t_vector;
 
+typedef struct s_pos
+{
+	int	x;
+	int	y;
+}		t_pos;
+
 typedef struct s_mlx
 {
 	void		*ptr;
 	void		*window;
+	t_img		img;
 	char		player_start_dir;
-	t_vector	player_pos;
+	t_vector	pos;
 	t_vector	dir;
 	t_vector	plane;
+	t_vector	ray;
+	t_vector	side_dist;
+	t_vector	delta_dist;
+	t_pos		map;
+	t_pos		step;
+	double		cameraX;
+	double		perp_wall_dist;
+	int			hit;
+	int			side;
+	int			height;
+	int			draw_start;
+	int			draw_end;
 }	t_mlx;
 
 typedef struct s_cub

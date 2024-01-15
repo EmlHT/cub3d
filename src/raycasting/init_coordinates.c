@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:00:56 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/14 19:33:43 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/15 16:44:55 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ static void	retrieve_position(t_cub *cube)
 		{
 			if (cube->map[y][x] == cube->mlx.player_start_dir)
 			{
-				cube->mlx.player_pos.x = x;
-				cube->mlx.player_pos.y = y;
+				cube->mlx.pos.x = x;
+				cube->mlx.pos.y = y;
 			}
 		}
 	}
