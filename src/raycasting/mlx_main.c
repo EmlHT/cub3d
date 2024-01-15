@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:41:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/12 16:56:16 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/15 08:48:48 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,19 @@ static int	handle_window_close(t_cub *cube)
 	return (0);
 }
 
-static int	ft_render(void)
+static int	ft_render(t_cub *cube)
 {
+	int		x;
+	double	w; //Le nombre de bande verticales qui corresponds a la witdh ?
+
+	x = -1;
+	w = SCREEN_WIDTH;
+	while (++x < w)
+	{
+		cube->mlx.cameraX = 2 * x / w - 1;
+		cube->mlx.ray.x = cube->mlx.dir.x + cube->mlx.plane.x *  cube->mlx.cameraX;
+		cube->mlx.ray.x = cube->mlx.dir.y + cube->mlx.plane.y *  cube->mlx.cameraX;
+	}
 	return (0);
 }
 
@@ -46,7 +57,7 @@ void	mlx_main(t_cub *cube)
 	cube->mlx.window = mlx_new_window(cube->mlx.ptr, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
 	if (!cube->mlx.window)
 		ft_free_exit(14, cube);
-	mlx_loop_hook(cube->mlx.ptr, &ft_render, cube);
+	mlx_loop_hook(cube->mlx.ptr, ft_render(cube), cube);
 	mlx_key_hook(cube->mlx.window, &handle_input, cube);
 	mlx_hook(cube->mlx.window, 17, 0, &handle_window_close, cube);
 	mlx_loop(cube->mlx.ptr);

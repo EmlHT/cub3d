@@ -51,7 +51,7 @@ $(NAME):    	$(OBJ)
 				@$(CC) $(CFLAGS) $(LINKS) $(OBJ) ${LIBFT_PATH}libft.a -I $(HEADER) -o $(NAME)
 
 debug:
-        		${MAKE} DEBUG=1
+	${MAKE} DEBUG=1
 
 clean:
 				@$(RM) $(OBJ)

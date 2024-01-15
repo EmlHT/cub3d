@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:58:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/12 17:08:37 by ehouot           ###   ########.fr       */
+/*   Updated: 2024/01/15 08:40:15 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct s_mlx
 	t_vector	player_pos;
 	t_vector	dir;
 	t_vector	plane;
+	t_vector	ray;
+	double		cameraX;
 }	t_mlx;
 
 typedef struct s_cub
