@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:00:56 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/12 16:33:24 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/14 19:33:43 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,23 @@ static void	retrieve_direction(t_cub *cube)
 {
 	if (cube->mlx.player_start_dir == 'N')
 	{
-		cube->mlx.dir.x = cube->mlx.dir.x;
-		cube->mlx.dir.y = cube->mlx.dir.y - 1;
+		cube->mlx.dir.x = 0;
+		cube->mlx.dir.y = -1;
 	}
 	else if (cube->mlx.player_start_dir == 'S')
 	{
-		cube->mlx.dir.x = cube->mlx.dir.x;
-		cube->mlx.dir.y = cube->mlx.dir.y + 1;
+		cube->mlx.dir.x = 0;
+		cube->mlx.dir.y = 1;
 	}
 	else if (cube->mlx.player_start_dir == 'W')
 	{
-		cube->mlx.dir.x = cube->mlx.dir.x - 1;
-		cube->mlx.dir.y = cube->mlx.dir.y;
+		cube->mlx.dir.x = -1;
+		cube->mlx.dir.y = 0;
 	}
 	else if (cube->mlx.player_start_dir == 'E')
 	{
-		cube->mlx.dir.x = cube->mlx.dir.x + 1;
-		cube->mlx.dir.y = cube->mlx.dir.y;
+		cube->mlx.dir.x = 1;
+		cube->mlx.dir.y = 0;
 	}
 }
 
