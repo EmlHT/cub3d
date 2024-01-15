@@ -8,9 +8,9 @@ SRC		        =	${addprefix ${SRC_PATH},	main.c \
 												parsing/parsing_main.c \
 												parsing/parsing_map.c \
 												parsing/init_map_elements.c \
-												parsing/init_coordinates.c \
 												parsing/array_manipulations.c \
 												parsing/parsing_elements.c \
+												raycasting/init_coordinates.c \
 												raycasting/mlx_main.c \
 												debug.c \
 												get_next_line/get_next_line.c \
