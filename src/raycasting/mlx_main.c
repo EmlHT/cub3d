@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:41:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/16 11:45:23 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/16 14:20:48 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,21 +101,15 @@ static void	draw_walls(t_cub *cube)
 				cube->mlx.side_dist.x += cube->mlx.delta_dist.x;
 				cube->mlx.map.x += cube->mlx.step.x;
 				cube->mlx.side = 0;
-				printf("map.x: %i, map.y: %i\n", cube->mlx.map.x, cube->mlx.map.y);
 			}
 			else
 			{
 				cube->mlx.side_dist.y += cube->mlx.delta_dist.y;
 				cube->mlx.map.y += cube->mlx.step.y;
 				cube->mlx.side = 1;
-				printf("map.x: %i, map.y: %i\n", cube->mlx.map.x, cube->mlx.map.y);
 			}
-			if (cube->map[cube->mlx.map.x][cube->mlx.map.y] == '1')
-			{
-				printf("hit\n");
+			if (cube->map[cube->mlx.map.y][cube->mlx.map.x] == '1')
 				cube->mlx.hit = 1;
-			}
-			printf("count\n");
 		}
 		if (cube->mlx.side == 0)
 			cube->mlx.perp_wall_dist = cube->mlx.side_dist.x - cube->mlx.delta_dist.x;
@@ -131,7 +125,10 @@ static void	draw_walls(t_cub *cube)
 		if (cube->mlx.draw_end >= SCREEN_HEIGHT)
 			cube->mlx.draw_end = SCREEN_HEIGHT - 1;
 
-		verLine(x, cube->mlx.draw_start, cube->mlx.draw_end, 0xFF0000, cube);
+		if (cube->mlx.side == 0)
+			verLine(x, cube->mlx.draw_start, cube->mlx.draw_end, 0xFF8080, cube);
+		else
+			verLine(x, cube->mlx.draw_start, cube->mlx.draw_end, 0x8B0000, cube);
     }
 }
 

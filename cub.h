@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:58:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/15 18:44:13 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/16 14:27:07 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include "Libft/libft.h"
 # include "minilibx-linux/mlx.h"
 
-# define SCREEN_WIDTH 640
-# define SCREEN_HEIGHT 480
+# define SCREEN_WIDTH 1678
+# define SCREEN_HEIGHT 904
 
 enum	e_elem
 {
