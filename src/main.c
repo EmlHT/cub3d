@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:24:32 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/15 17:16:19 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/16 11:41:12 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	main(int argc, char **argv)
 	(void)argc;
 	parsing_main(argc, argv, &cube);
 	init_coordinates(&cube);
+	printf("player pos x:%f\n", cube.mlx.pos.x);
+	printf("player pos y:%f\n", cube.mlx.pos.y);
 	mlx_main(&cube);
 	return (0);
 }

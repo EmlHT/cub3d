@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:41:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/15 18:48:09 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/16 11:45:23 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,34 @@ static int	handle_window_close(t_cub *cube)
 {
 	ft_free_mlx_ptr_cube(cube);
 	return (0);
+}
+
+// t_img	ft_new_image(void *mlx, char *path)
+// {
+// 	t_img	image;
+
+// 	image.reference = mlx_xpm_file_to_image(mlx, path, &image.size.x,
+// 			&image.size.y);
+// 	image.pixels = mlx_get_data_addr(image.reference, &image.bits_per_pixel,
+// 			&image.line_size, &image.endian);
+// 	return (image);
+// }
+
+// static void   my_mlx_pixel_put(t_cub *cube, int x, int y, int color)
+// {
+//     char        *dst;
+//     const int    offset = (y * cube->mlx.img.line_len + x * (cube->mlx.img.bpp / 8));
+
+//     dst = cube->mlx.img.addr + offset;
+//     *(unsigned int *)dst = color;
+// }
+
+static void verLine(int x, int drawStart, int drawEnd, int color, t_cub *cube)
+{
+	for (int y = drawStart; y <= drawEnd; y++)
+	{
+		mlx_pixel_put(cube->mlx.ptr, cube->mlx.window, x, y, color);
+    }
 }
 
 static void	draw_walls(t_cub *cube)
@@ -73,15 +101,21 @@ static void	draw_walls(t_cub *cube)
 				cube->mlx.side_dist.x += cube->mlx.delta_dist.x;
 				cube->mlx.map.x += cube->mlx.step.x;
 				cube->mlx.side = 0;
+				printf("map.x: %i, map.y: %i\n", cube->mlx.map.x, cube->mlx.map.y);
 			}
 			else
 			{
 				cube->mlx.side_dist.y += cube->mlx.delta_dist.y;
 				cube->mlx.map.y += cube->mlx.step.y;
 				cube->mlx.side = 1;
+				printf("map.x: %i, map.y: %i\n", cube->mlx.map.x, cube->mlx.map.y);
 			}
-			if (cube->map[cube->mlx.map.x][cube->mlx.map.y] == 1)
+			if (cube->map[cube->mlx.map.x][cube->mlx.map.y] == '1')
+			{
+				printf("hit\n");
 				cube->mlx.hit = 1;
+			}
+			printf("count\n");
 		}
 		if (cube->mlx.side == 0)
 			cube->mlx.perp_wall_dist = cube->mlx.side_dist.x - cube->mlx.delta_dist.x;
@@ -90,8 +124,6 @@ static void	draw_walls(t_cub *cube)
 		
 		cube->mlx.height = (int)(SCREEN_HEIGHT / cube->mlx.perp_wall_dist);
 		
-		printf("mlx.height: %i\n", cube->mlx.height);
-		
 		cube->mlx.draw_start = -cube->mlx.height / 2 + SCREEN_HEIGHT / 2;
 		if (cube->mlx.draw_start < 0)
 			cube->mlx.draw_start = 0;
@@ -99,9 +131,7 @@ static void	draw_walls(t_cub *cube)
 		if (cube->mlx.draw_end >= SCREEN_HEIGHT)
 			cube->mlx.draw_end = SCREEN_HEIGHT - 1;
 
-		int whatever = cube->mlx.draw_end;
-		while (--whatever > cube->mlx.draw_start)
-			mlx_pixel_put(cube->mlx.ptr, cube->mlx.window, cube->mlx.draw_start, whatever, 0xFF0000);
+		verLine(x, cube->mlx.draw_start, cube->mlx.draw_end, 0xFF0000, cube);
     }
 }
 
@@ -120,10 +150,10 @@ static int	handle_input(int keysym, t_cub *cube)
 	return (0);
 }
 
-static int    ft_render(void)
-{
-    return (0);
-}
+// static int    ft_render(void)
+// {
+//     return (0);
+// }
 
 void	mlx_main(t_cub *cube)
 {
@@ -134,7 +164,9 @@ void	mlx_main(t_cub *cube)
 	if (!cube->mlx.window)
 		ft_free_exit(14, cube);
 	cube->mlx.img.mlx_img = mlx_new_image(cube->mlx.ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
-	mlx_loop_hook(cube->mlx.ptr, &ft_render, NULL);
+	cube->mlx.img.addr = mlx_get_data_addr(cube->mlx.img.mlx_img, \
+    &(cube->mlx.img.bpp), &(cube->mlx.img.line_len), &(cube->mlx.img.endian));
+	//mlx_loop_hook(cube->mlx.ptr, &ft_render, NULL);
 	draw_walls(cube);
 	mlx_key_hook(cube->mlx.window, &handle_input, cube);
 	mlx_hook(cube->mlx.window, 17, 0, &handle_window_close, cube);
