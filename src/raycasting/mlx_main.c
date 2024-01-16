@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:41:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/16 14:20:48 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/16 15:02:25 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,8 @@ static int	handle_input(int keysym, t_cub *cube)
 {
 	if (keysym == 53)
 		ft_free_mlx_ptr_cube(cube);
-	// if (keysym == 0)
-	// 	ft_movement_a(map);
+	if (keysym == 0)
+		ft_movement_a(cube);
 	// if (keysym == 13)
 	// 	ft_movement_w(map);
 	// if (keysym == 2)

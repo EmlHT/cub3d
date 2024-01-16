@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:58:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/16 14:27:07 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/16 15:03:48 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,11 @@ void	parse_cube(t_cub *cube);
 /***_________ MLX FUNCTIONS _________***/
 void	mlx_main(t_cub *cube);
 void	ft_free_mlx_ptr_cube(t_cub *cube);
+
+/***_________ MOVEMENT KEYS _________***/
+void	ft_movement_a(t_cub *cube);
+void	ft_movement_w(t_cub *cube);
+void	ft_movement_d(t_cub *cube);
+void	ft_movement_s(t_cub *cube);
 
 #endif
