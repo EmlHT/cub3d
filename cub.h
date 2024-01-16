@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:58:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/15 08:40:15 by ehouot           ###   ########.fr       */
+/*   Updated: 2024/01/15 11:39:49 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,9 @@ void	parse_cube(t_cub *cube);
 /***_________ MLX FUNCTIONS _________***/
 void	mlx_main(t_cub *cube);
 void	ft_free_mlx_ptr_cube(t_cub *cube);
+
+extern int     mlx_loop_hook (void *mlx_ptr, int (*funct_ptr)(), void *param);
+extern int     mlx_loop (void *mlx_ptr);
+extern int     mlx_destroy_window(void *mlx_ptr, void *win_ptr);
 
 #endif

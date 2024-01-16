@@ -6,7 +6,7 @@
 /*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:41:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/15 08:55:11 by ehouot           ###   ########.fr       */
+/*   Updated: 2024/01/15 08:59:00 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	mlx_main(t_cub *cube)
 	cube->mlx.window = mlx_new_window(cube->mlx.ptr, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
 	if (!cube->mlx.window)
 		ft_free_exit(14, cube);
-	mlx_loop_hook(cube->mlx.ptr, ft_render(cube), cube);
+	mlx_loop_hook(cube->mlx.ptr, &ft_render, cube);
 	mlx_key_hook(cube->mlx.window, &handle_input, cube);
 	mlx_hook(cube->mlx.window, 17, 0, &handle_window_close, cube);
 	mlx_loop(cube->mlx.ptr);

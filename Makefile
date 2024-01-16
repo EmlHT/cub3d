@@ -2,15 +2,6 @@
 LIBFT_PATH      =	./Libft/
 SRC_PATH		=	./src/
 
-OS := ${shell uname}
-
-ifeq (${OS}, Linux)
-    COMPILE = @$(CC) $(CFLAGS) $(OBJ) ${LIBFT_PATH}libft.a -I $(HEADER) -o $(NAME)
-else
-	COMPILE = @$(CC) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit $(OBJ) ${LIBFT_PATH}libft.a -I $(HEADER) -o $(NAME)
-endif
-
-
 SRC		        =	${addprefix ${SRC_PATH},	main.c \
 												errors.c \
 												parsing/parsing_main.c \
@@ -26,29 +17,46 @@ SRC		        =	${addprefix ${SRC_PATH},	main.c \
 
 OBJ             = ${SRC:.c=.o}
 
+MLX_PATH		= ./minilibx-linux/
+
 HEADER          = ./
 
-CC              = cc
+CC              = gcc
 
 RM              = rm -f
 
-CFLAGS          = -Wall -Werror -Wextra -g
+CFLAGS          = -Wall -Werror -Wextra
+
+OS := ${shell uname}
+
 LINKS			= -lmlx -framework OpenGL -framework AppKit
 
-ifdef DEBUG
-        CFLAGS += -fsanitize=address -g3
+# -Lminilibx-linux -lminilibx-linux -Iminilibx-linux -lXext -lX11 -lm -lz -o
+
+LINKS_LINUX		= -Lminilibx-linux -lmlx -lXext -lX11 -lm -lz -o 
+
+# -L/usr/lib -I/usr/include  -I$(MLX_DIR)
+
+ifeq (${OS}, Darwin)
+	COMP = @$(CC) $(CFLAGS) $(LINKS) $(OBJ) ${LIBFT_PATH}libft.a -I$(HEADER) -o $(NAME)
+else
+	COMP = @$(CC) $(CFLAGS) $(LINKS_LINUX) $(OBJ) ${LIBFT_PATH}libft.a -I$(HEADER) -o $(NAME)
 endif
 
-NAME            = cub3D
+ifdef DEBUG
+    	CFLAGS += -fsanitize=address -g3
+endif
 
-all:            $(NAME)
+NAME			= cub3D
+
+all:			$(NAME)
 
 .c.o:
-				@$(CC) $(CFLAGS) -I $(HEADER) -c $< -o $(<:.c=.o)
+				@$(CC) $(CFLAGS) -I$(HEADER) -c $< -o $(<:.c=.o)
 
-$(NAME):    	$(OBJ)
+$(NAME):		$(OBJ)
 				@${MAKE} -C ${LIBFT_PATH}
-				@$(CC) $(CFLAGS) $(LINKS) $(OBJ) ${LIBFT_PATH}libft.a -I $(HEADER) -o $(NAME)
+				$(COMP)
 
 debug:
 	${MAKE} DEBUG=1

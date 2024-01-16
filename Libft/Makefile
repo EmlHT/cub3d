@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+         #
+#    By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 20:15:35 by ehouot            #+#    #+#              #
-#    Updated: 2024/01/10 12:15:23 by brettlecler      ###   ########.fr        #
+#    Updated: 2024/01/15 09:40:15 by ehouot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,7 @@ OBJ_BONUS	= $(SRC_BONUS:.c=.o)
 
 OBJ_ADD		= $(SRC_ADD:.c=.o)
 
-CC 			= cc
+CC 			= gcc
 
 RM 			= rm -f
 
