@@ -33,14 +33,14 @@ LINKS			= -lmlx -framework OpenGL -framework AppKit
 
 # -Lminilibx-linux -lminilibx-linux -Iminilibx-linux -lXext -lX11 -lm -lz -o
 
-LINKS_LINUX		= -Lminilibx-linux -lmlx -lXext -lX11 -lm -lz -o 
+LINKS_LINUX		= -Iinclude -ldl -pthread -lXext -lX11 -lm -lz -o 
 
 # -L/usr/lib -I/usr/include  -I$(MLX_DIR)
 
 ifeq (${OS}, Darwin)
 	COMP = @$(CC) $(CFLAGS) $(LINKS) $(OBJ) ${LIBFT_PATH}libft.a -I$(HEADER) -o $(NAME)
 else
-	COMP = @$(CC) $(CFLAGS) $(LINKS_LINUX) $(OBJ) ${LIBFT_PATH}libft.a -I$(HEADER) -o $(NAME)
+	COMP = @$(CC) $(CFLAGS) $(OBJ) ${LIBFT_PATH}libft.a $(LINKS_LINUX) -I$(HEADER) -o $(NAME)
 endif
 
 ifdef DEBUG
