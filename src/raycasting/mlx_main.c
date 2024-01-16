@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:41:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/16 15:02:25 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/16 18:35:32 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static void	draw_walls(t_cub *cube)
 	int	x;
 
     x = -1;
+	cube->mlx.move.time = 0;
+	cube->mlx.move.oldTime = 0;
     while (++x < SCREEN_WIDTH)
     {
         cube->mlx.cameraX = 2 * x / (double)SCREEN_WIDTH - 1;
@@ -134,6 +136,8 @@ static void	draw_walls(t_cub *cube)
 
 static int	handle_input(int keysym, t_cub *cube)
 {
+	cube->mlx.move.oldTime = cube->mlx.move.time;
+	cube->mlx.move.time = getTicks(); // a creer
 	if (keysym == 53)
 		ft_free_mlx_ptr_cube(cube);
 	if (keysym == 0)

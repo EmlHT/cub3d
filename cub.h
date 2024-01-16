@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:58:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/16 15:03:48 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/16 18:20:10 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
+# include <time.h>
 # include "Libft/libft.h"
 # include "minilibx-linux/mlx.h"
 
@@ -60,6 +61,16 @@ typedef struct s_pos
 	int	y;
 }		t_pos;
 
+typedef struct s_move
+{
+	double	time;
+	double	oldTime;
+	double	frametime;
+	double	move_speed;
+	double	rot_speed;
+}		t_move;
+
+
 typedef struct s_mlx
 {
 	void		*ptr;
@@ -81,6 +92,9 @@ typedef struct s_mlx
 	int			height;
 	int			draw_start;
 	int			draw_end;
+	double		move_speed;
+	double		rot_speed;
+	t_move		move;
 }	t_mlx;
 
 typedef struct s_cub
