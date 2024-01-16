@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:41:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/16 18:35:32 by ehouot           ###   ########.fr       */
+/*   Updated: 2024/01/16 19:16:28 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void verLine(int x, int drawStart, int drawEnd, int color, t_cub *cube)
     }
 }
 
-static void	draw_walls(t_cub *cube)
+void	draw_walls(t_cub *cube)
 {
 	int	x;
 
@@ -134,20 +134,27 @@ static void	draw_walls(t_cub *cube)
     }
 }
 
+void	ft_new_image(t_cub *cube)
+{
+	cube->mlx.img.mlx_img = mlx_new_image(cube->mlx.ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
+	cube->mlx.img.addr = mlx_get_data_addr(cube->mlx.img.mlx_img, \
+    &(cube->mlx.img.bpp), &(cube->mlx.img.line_len), &(cube->mlx.img.endian));
+}
+
 static int	handle_input(int keysym, t_cub *cube)
 {
-	cube->mlx.move.oldTime = cube->mlx.move.time;
-	cube->mlx.move.time = getTicks(); // a creer
+	// cube->mlx.move.oldTime = cube->mlx.move.time;
+	// cube->mlx.move.time = getTicks(); // a creer
 	if (keysym == 53)
 		ft_free_mlx_ptr_cube(cube);
-	if (keysym == 0)
-		ft_movement_a(cube);
-	// if (keysym == 13)
-	// 	ft_movement_w(map);
+	// if (keysym == 0)
+	// 	ft_movement_a(cube);
+	if (keysym == 13)
+		ft_movement_w(cube);
 	// if (keysym == 2)
-	// 	ft_movement_d(map);
-	// if (keysym == 1)
-	// 	ft_movement_s(map);
+	// 	ft_movement_d(cube);
+	if (keysym == 1)
+		ft_movement_s(cube);
 	return (0);
 }
 
@@ -164,9 +171,7 @@ void	mlx_main(t_cub *cube)
 	cube->mlx.window = mlx_new_window(cube->mlx.ptr, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
 	if (!cube->mlx.window)
 		ft_free_exit(14, cube);
-	cube->mlx.img.mlx_img = mlx_new_image(cube->mlx.ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
-	cube->mlx.img.addr = mlx_get_data_addr(cube->mlx.img.mlx_img, \
-    &(cube->mlx.img.bpp), &(cube->mlx.img.line_len), &(cube->mlx.img.endian));
+	ft_new_image(cube);
 	//mlx_loop_hook(cube->mlx.ptr, &ft_render, NULL);
 	draw_walls(cube);
 	mlx_key_hook(cube->mlx.window, &handle_input, cube);

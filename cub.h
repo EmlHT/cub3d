@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:58:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/16 18:20:10 by ehouot           ###   ########.fr       */
+/*   Updated: 2024/01/16 19:17:19 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,6 @@ typedef struct s_mlx
 	int			height;
 	int			draw_start;
 	int			draw_end;
-	double		move_speed;
-	double		rot_speed;
 	t_move		move;
 }	t_mlx;
 
@@ -142,6 +140,8 @@ void	parse_cube(t_cub *cube);
 /***_________ MLX FUNCTIONS _________***/
 void	mlx_main(t_cub *cube);
 void	ft_free_mlx_ptr_cube(t_cub *cube);
+void	draw_walls(t_cub *cube);
+void	ft_new_image(t_cub *cube);
 
 /***_________ MOVEMENT KEYS _________***/
 void	ft_movement_a(t_cub *cube);
