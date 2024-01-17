@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:41:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/17 11:38:29 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/17 18:38:44 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ static int	handle_window_close(t_cub *cube)
 // 	return (image);
 // }
 
-// static void   my_mlx_pixel_put(t_cub *cube, int x, int y, int color)
-// {
-//     char        *dst;
-//     const int    offset = (y * cube->mlx.img.line_len + x * (cube->mlx.img.bpp / 8));
+static void   my_mlx_pixel_put(t_cub *cube, int x, int y, int color)
+{
+    char        *dst;
+    const int    offset = (y * cube->mlx.img.line_len + x * (cube->mlx.img.bpp / 8));
 
-//     dst = cube->mlx.img.addr + offset;
-//     *(unsigned int *)dst = color;
-// }
+    dst = cube->mlx.img.addr + offset;
+    *(unsigned int *)dst = color;
+}
 
 static void verLine(int x, int drawStart, int drawEnd, int color, t_cub *cube)
 {
@@ -73,6 +73,8 @@ void	draw_walls(t_cub *cube)
 		
 		//initialising varibales for determining if a wall has been hit, wall distance, which side (x or y);
 		cube->mlx.perp_wall_dist = 0;
+		cube->mlx.wall_x = 0;
+		cube->mlx.tex_x = 0;
 		cube->mlx.hit = 0;
 		cube->mlx.side = 2;
 		
@@ -114,10 +116,24 @@ void	draw_walls(t_cub *cube)
 				cube->mlx.hit = 1;
 		}
 		if (cube->mlx.side == 0)
+		{
 			cube->mlx.perp_wall_dist = cube->mlx.side_dist.x - cube->mlx.delta_dist.x;
+			cube->mlx.wall_x = cube->mlx.pos.y + cube->mlx.perp_wall_dist * cube->mlx.ray.y;
+		}
 		else
+		{
 			cube->mlx.perp_wall_dist = cube->mlx.side_dist.y - cube->mlx.delta_dist.y;
+			cube->mlx.wall_x = cube->mlx.pos.x + cube->mlx.perp_wall_dist * cube->mlx.ray.x;
+		}
+		cube->mlx.wall_x -= floor(cube->mlx.wall_x);
 		
+		cube->mlx.tex_x = (int)(cube->mlx.wall_x * (double)(TEXTURE_WIDTH));
+
+		if (cube->mlx.side == 0 && cube->mlx.ray.x > 0)
+			cube->mlx.tex_x = TEXTURE_WIDTH - cube->mlx.tex_x - 1;
+		if (cube->mlx.side == 1 && cube->mlx.ray.y < 0)
+			cube->mlx.tex_x = TEXTURE_WIDTH - cube->mlx.tex_x - 1;
+
 		cube->mlx.height = (int)(SCREEN_HEIGHT / cube->mlx.perp_wall_dist);
 		
 		cube->mlx.draw_start = -cube->mlx.height / 2 + SCREEN_HEIGHT / 2;
@@ -142,7 +158,7 @@ void	draw_walls(t_cub *cube)
 //     *(int *)pixel = color;
 // }
 
-void	render_background(t_cub *cube, int color)
+void	render_background(t_cub *cube)
 {
     int	i;
     int	j;
@@ -152,17 +168,23 @@ void	render_background(t_cub *cube, int color)
     {
         j = 0;
         while (j < SCREEN_WIDTH)
-            mlx_pixel_put(cube->mlx.ptr, cube->mlx.window, j++, i, color);
-        ++i;
+		{
+			cube->mlx.img = ft_new_image(cube, "textures/black_bg.xpm");
+			mlx_put_image_to_window(cube->mlx.ptr, cube->mlx.window, cube->mlx.img.ref, j, i);
+			j += 64;
+		}
+        i += 64;
     }
 }
 
-void	ft_new_image(t_cub *cube)
+t_img	ft_new_image(t_cub *cube, char *img_source)
 {
-	cube->mlx.img.mlx_img = mlx_new_image(cube->mlx.ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
-	cube->mlx.img.addr = mlx_get_data_addr(cube->mlx.img.mlx_img, \
-    &(cube->mlx.img.bpp), &(cube->mlx.img.line_len), &(cube->mlx.img.endian));
-	render_background(cube, 0x000000);
+	t_img	image;
+
+	image.ref = mlx_xpm_file_to_image(cube->mlx.ptr, img_source, &image.size.x, &image.size.y);
+	image.addr = mlx_get_data_addr(image.ref, \
+    &(image.bpp), &(image.line_len), &(image.endian));
+	return (image);
 }
 
 static int	handle_input(int keysym, t_cub *cube)
@@ -199,7 +221,8 @@ void	mlx_main(t_cub *cube)
 	cube->mlx.window = mlx_new_window(cube->mlx.ptr, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
 	if (!cube->mlx.window)
 		ft_free_exit(14, cube);
-	ft_new_image(cube);
+	render_background(cube);
+	
 	//mlx_loop_hook(cube->mlx.ptr, &ft_render, NULL);
 	draw_walls(cube);
 	mlx_key_hook(cube->mlx.window, &handle_input, cube);

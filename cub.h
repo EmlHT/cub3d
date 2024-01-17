@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:58:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/17 11:38:53 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/17 17:28:21 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,11 @@
 # define ROTATE_RIGHT 124
 
 # define SCREEN_WIDTH 640
-# define SCREEN_HEIGHT 480
-# define MOVE_SPEED 0.1
+# define SCREEN_HEIGHT 512
+# define TEXTURE_WIDTH 64
+# define TEXTURE_HEIGHT 64
+
+# define MOVE_SPEED 0.3
 # define ROT_SPEED 0.05
 
 enum	e_elem
@@ -41,15 +44,6 @@ enum	e_elem
 	C,		// --> 4
 	F,		// --> 5
 };
-
-typedef struct s_img
-{
-    void	*mlx_img;
-    char	*addr;
-    int		bpp;
-    int		line_len;
-    int		endian;
-}	t_img;
 typedef	struct s_colours
 {
 	int	r;
@@ -68,6 +62,16 @@ typedef struct s_pos
 	int	x;
 	int	y;
 }		t_pos;
+
+typedef struct s_img
+{
+    void	*ref;
+    char	*addr;
+	t_pos	size;
+    int		bpp;
+    int		line_len;
+    int		endian;
+}	t_img;
 
 typedef struct s_move
 {
@@ -95,6 +99,8 @@ typedef struct s_mlx
 	t_pos		step;
 	double		cameraX;
 	double		perp_wall_dist;
+	double		wall_x;
+	int			tex_x;
 	int			hit;
 	int			side;
 	int			height;
@@ -149,7 +155,8 @@ void	parse_cube(t_cub *cube);
 void	mlx_main(t_cub *cube);
 void	ft_free_mlx_ptr_cube(t_cub *cube);
 void	draw_walls(t_cub *cube);
-void	ft_new_image(t_cub *cube);
+t_img	ft_new_image(t_cub *cube, char *img_source);
+void	render_background(t_cub *cube);
 
 /***_________ MOVEMENT KEYS _________***/
 void	ft_movement_left(t_cub *cube);

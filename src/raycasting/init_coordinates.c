@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:00:56 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/16 14:28:56 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/17 15:34:01 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,29 @@ static void	retrieve_direction(t_cub *cube)
 	{
 		cube->mlx.dir.x = 0;
 		cube->mlx.dir.y = -1;
+		cube->mlx.plane.x = 0.66;
+		cube->mlx.plane.y = 0;
 	}
 	else if (cube->mlx.player_start_dir == 'S')
 	{
 		cube->mlx.dir.x = 0;
 		cube->mlx.dir.y = 1;
+		cube->mlx.plane.x = 0.66;
+		cube->mlx.plane.y = 0;
 	}
 	else if (cube->mlx.player_start_dir == 'W')
 	{
 		cube->mlx.dir.x = -1;
 		cube->mlx.dir.y = 0;
+		cube->mlx.plane.x = 0;
+		cube->mlx.plane.y = 0.66;
 	}
 	else if (cube->mlx.player_start_dir == 'E')
 	{
 		cube->mlx.dir.x = 1;
 		cube->mlx.dir.y = 0;
+		cube->mlx.plane.x = 0;
+		cube->mlx.plane.y = 0.66;
 	}
 }
 
@@ -60,6 +68,20 @@ void	init_coordinates(t_cub *cube)
 {
 	retrieve_position(cube);
 	retrieve_direction(cube);
-	cube->mlx.plane.x = 0;
-	cube->mlx.plane.y = 0.66;
+	// cube->mlx.plane.x = 0;
+	// cube->mlx.plane.y = 0.66;
+	// if (cube->mlx.player_start_dir == 'N' || cube->mlx.player_start_dir == 'S')
+	// {
+	// 	if (cube->mlx.player_start_dir == 'N')
+	// 		cube->mlx.plane.y = -0.66;
+	// 	else
+	// 		cube->mlx.plane.y = 0.66;
+	// }
+	// if (cube->mlx.player_start_dir == 'E' || cube->mlx.player_start_dir == 'W')
+	// {
+	// 	if (cube->mlx.player_start_dir == 'E')
+	// 		cube->mlx.plane.x = -0.66;
+	// 	else
+	// 		cube->mlx.plane.x = 0.66;
+	// }
 }

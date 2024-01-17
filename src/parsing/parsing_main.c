@@ -105,7 +105,8 @@ void	parsing_main(int argc, char **argv, t_cub *cube)
 		ft_free_exit(0, cube);
 	parse_cube(cube);
 	parse_map(cube);
+}
+
 	// print_elements(cube);
 	// print_colours(cube);
 	// print_map(cube);
-}
