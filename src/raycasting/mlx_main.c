@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:41:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/17 11:17:35 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/17 11:38:29 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,12 +177,12 @@ static int	handle_input(int keysym, t_cub *cube)
 		ft_movement_forward(cube);
 	else if (keysym == RIGHT)
 		ft_movement_right(cube);
-	// else if (keysym == BACKWARD)
-	// 	ft_movement_backward(cube);
-	// else if (keysym == ROTATE_RIGHT)
-	// 	ft_right_direction(cube);
-	// else if (keysym == ROTATE_LEFT)
-	// 	ft_left_direction(cube);
+	else if (keysym == BACKWARD)
+		ft_movement_backward(cube);
+	else if (keysym == ROTATE_RIGHT)
+		ft_rotate_right(cube);
+	else if (keysym == ROTATE_LEFT)
+		ft_rotate_left(cube);
 	return (0);
 }
 

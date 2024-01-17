@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:58:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/17 11:18:34 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/17 11:38:53 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ void	ft_movement_left(t_cub *cube);
 void	ft_movement_forward(t_cub *cube);
 void	ft_movement_right(t_cub *cube);
 void	ft_movement_backward(t_cub *cube);
-void	ft_right_direction(t_cub *cube);
-
+void	ft_rotate_left(t_cub *cube);
+void	ft_rotate_right(t_cub *cube);
 
 #endif

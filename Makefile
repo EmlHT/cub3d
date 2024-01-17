@@ -13,7 +13,7 @@ SRC		        =	${addprefix ${SRC_PATH},	main.c \
 												raycasting/init_coordinates.c \
 												raycasting/mlx_main.c \
 												raycasting/movements.c \
-												raycasting/directions.c \
+												raycasting/rotation.c \
 												debug.c \
 												get_next_line/get_next_line.c \
 												get_next_line/get_next_line_utils.c}
