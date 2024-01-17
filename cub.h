@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:58:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/16 19:17:19 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/17 08:02:42 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
-# include <time.h>
 # include "Libft/libft.h"
 # include "minilibx-linux/mlx.h"
 
-# define SCREEN_WIDTH 1678
-# define SCREEN_HEIGHT 904
+# define SCREEN_WIDTH 640
+# define SCREEN_HEIGHT 480
+# define MOVE_SPEED 0.1
+# define ROT_SPEED 0.05
 
 enum	e_elem
 {

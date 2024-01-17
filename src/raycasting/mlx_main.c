@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:41:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/16 19:16:28 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/17 08:02:24 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,11 +134,35 @@ void	draw_walls(t_cub *cube)
     }
 }
 
+// void	bpp_img_pix_put(t_cub *cube, int x, int y, int color)
+// {
+//     char    *pixel;
+
+//     pixel = cube->mlx.img.addr + (y * cube->mlx.img.line_len + x * (cube->mlx.img.bpp / 8));
+//     *(int *)pixel = color;
+// }
+
+void	render_background(t_cub *cube, int color)
+{
+    int	i;
+    int	j;
+
+    i = 0;
+    while (i < SCREEN_HEIGHT)
+    {
+        j = 0;
+        while (j < SCREEN_WIDTH)
+            mlx_pixel_put(cube->mlx.ptr, cube->mlx.window, j++, i, color);
+        ++i;
+    }
+}
+
 void	ft_new_image(t_cub *cube)
 {
 	cube->mlx.img.mlx_img = mlx_new_image(cube->mlx.ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
 	cube->mlx.img.addr = mlx_get_data_addr(cube->mlx.img.mlx_img, \
     &(cube->mlx.img.bpp), &(cube->mlx.img.line_len), &(cube->mlx.img.endian));
+	render_background(cube, 0x000000);
 }
 
 static int	handle_input(int keysym, t_cub *cube)
@@ -147,12 +171,12 @@ static int	handle_input(int keysym, t_cub *cube)
 	// cube->mlx.move.time = getTicks(); // a creer
 	if (keysym == 53)
 		ft_free_mlx_ptr_cube(cube);
-	// if (keysym == 0)
-	// 	ft_movement_a(cube);
+	if (keysym == 0)
+		ft_movement_a(cube);
 	if (keysym == 13)
 		ft_movement_w(cube);
-	// if (keysym == 2)
-	// 	ft_movement_d(cube);
+	if (keysym == 2)
+		ft_movement_d(cube);
 	if (keysym == 1)
 		ft_movement_s(cube);
 	return (0);
