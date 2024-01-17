@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:41:07 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/17 08:02:24 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/17 11:17:35 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,14 +171,18 @@ static int	handle_input(int keysym, t_cub *cube)
 	// cube->mlx.move.time = getTicks(); // a creer
 	if (keysym == 53)
 		ft_free_mlx_ptr_cube(cube);
-	if (keysym == 0)
-		ft_movement_a(cube);
-	if (keysym == 13)
-		ft_movement_w(cube);
-	if (keysym == 2)
-		ft_movement_d(cube);
-	if (keysym == 1)
-		ft_movement_s(cube);
+	else if (keysym == LEFT)
+		ft_movement_left(cube);
+	else if (keysym == FORWARD)
+		ft_movement_forward(cube);
+	else if (keysym == RIGHT)
+		ft_movement_right(cube);
+	// else if (keysym == BACKWARD)
+	// 	ft_movement_backward(cube);
+	// else if (keysym == ROTATE_RIGHT)
+	// 	ft_right_direction(cube);
+	// else if (keysym == ROTATE_LEFT)
+	// 	ft_left_direction(cube);
 	return (0);
 }
 

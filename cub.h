@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:58:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/17 08:02:42 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/17 11:18:34 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@
 # include <math.h>
 # include "Libft/libft.h"
 # include "minilibx-linux/mlx.h"
+
+# define FORWARD 13
+# define BACKWARD 1
+# define LEFT 0
+# define RIGHT 2
+# define ROTATE_LEFT 123
+# define ROTATE_RIGHT 124
 
 # define SCREEN_WIDTH 640
 # define SCREEN_HEIGHT 480
@@ -145,9 +152,11 @@ void	draw_walls(t_cub *cube);
 void	ft_new_image(t_cub *cube);
 
 /***_________ MOVEMENT KEYS _________***/
-void	ft_movement_a(t_cub *cube);
-void	ft_movement_w(t_cub *cube);
-void	ft_movement_d(t_cub *cube);
-void	ft_movement_s(t_cub *cube);
+void	ft_movement_left(t_cub *cube);
+void	ft_movement_forward(t_cub *cube);
+void	ft_movement_right(t_cub *cube);
+void	ft_movement_backward(t_cub *cube);
+void	ft_right_direction(t_cub *cube);
+
 
 #endif
