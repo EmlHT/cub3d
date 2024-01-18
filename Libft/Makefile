@@ -6,9 +6,12 @@
 #    By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 20:15:35 by ehouot            #+#    #+#              #
-#    Updated: 2024/01/10 12:15:23 by brettlecler      ###   ########.fr        #
+#    Updated: 2024/01/18 10:54:38 by brettlecler      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+BASIC = \033[0m
+LYELLOW = \033[38;5;228m
 
 SRC 		= ft_isalpha.c \
 				ft_isdigit.c \
@@ -81,16 +84,17 @@ NAME 		= libft.a
 all:		$(NAME)
 
 .c.o:
-			$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+			@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 $(NAME):	$(OBJ) $(OBJ_ADD)
-			ar rcs $(NAME) $(OBJ) $(OBJ_ADD)
+			@ar rcs $(NAME) $(OBJ) $(OBJ_ADD)
+			@echo "${LYELLOW}Libft compiled${BASIC}"
 
 bonus:		$(OBJ) $(OBJ_BONUS) $(OBJ_ADD)
-			ar rcs $(NAME) $(OBJ) $(OBJ_BONUS) $(OBJ_ADD)
+			@ar rcs $(NAME) $(OBJ) $(OBJ_BONUS) $(OBJ_ADD)
 
 clean:
-			$(RM) $(OBJ) $(OBJ_BONUS) $(OBJ_ADD)
+			@$(RM) $(OBJ) $(OBJ_BONUS) $(OBJ_ADD)
 
 fclean: 	clean
 			$(RM) $(NAME)

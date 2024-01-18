@@ -1,3 +1,6 @@
+BASIC = \033[0m
+BOLD = \033[1m
+LBLUE = \033[38;5;153m
 
 LIBFT_PATH      =	./Libft/
 SRC_PATH		=	./src/
@@ -12,6 +15,7 @@ SRC		        =	${addprefix ${SRC_PATH},	main.c \
 												parsing/parsing_elements.c \
 												raycasting/init_coordinates.c \
 												raycasting/mlx_main.c \
+												raycasting/mlx_functions.c \
 												raycasting/movements.c \
 												raycasting/rotation.c \
 												debug.c \
@@ -35,7 +39,7 @@ LINKS			= -lmlx -framework OpenGL -framework AppKit
 ifeq (${OS}, Darwin)
 	COMP = @$(CC) $(CFLAGS) $(LINKS) $(OBJ) ${LIBFT_PATH}libft.a -I $(HEADER) -o $(NAME)
 else
-	COMP = @$(CC) $(CFLAGS) $(OBJ) ${LIBFT_PATH}libft.a -I $(HEADER) -o $(NAME)
+	COMP = $(CC) $(CFLAGS) $(OBJ) ${LIBFT_PATH}libft.a -I $(HEADER) -o $(NAME) -L /home/ehouot/Git/cub3d/minilibx-linux -lmlx -lXext -lX11 -lm
 endif
 
 ifdef DEBUG
@@ -52,6 +56,7 @@ all:            $(NAME)
 $(NAME):    	$(OBJ)
 				@${MAKE} -C ${LIBFT_PATH}
 				$(COMP)
+				@echo "${LBLUE}${BOLD}cub3D compiled${BASIC}"
 
 debug:
 	${MAKE} DEBUG=1
@@ -62,6 +67,7 @@ clean:
 
 fclean:         clean
 				@$(RM) $(NAME) ${LIBFT_PATH}libft.a
+				@echo "${LBLUE}deleted cub3D support files${BASIC}"
 
 re:				fclean all
 
