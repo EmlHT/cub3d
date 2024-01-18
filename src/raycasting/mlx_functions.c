@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:20:13 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/18 17:08:03 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/18 17:39:30 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	render_map(t_cub *cube)
 	int	x;
 
     x = -1;
-	render_background(cube);
+	color_ceiling_floor(cube);
     while (++x < SCREEN_WIDTH)
     {
         init_ray(cube, x);

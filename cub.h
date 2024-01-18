@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:58:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/18 17:08:49 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/18 18:09:05 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,5 +191,6 @@ void	calculate_wall_distance(t_cub *cube);
 void	perform_dda_algorithm(t_cub *cube);
 void	init_ray_direction(t_cub *cube);
 void	init_ray(t_cub *cube, int x);
+void	color_ceiling_floor(t_cub *cube);
 
 #endif
