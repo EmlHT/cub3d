@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:00:56 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/18 16:37:38 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/18 16:40:28 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,20 +68,4 @@ void	init_coordinates(t_cub *cube)
 {
 	retrieve_position(cube);
 	retrieve_direction(cube);
-	// cube->mlx.plane.x = 0;
-	// cube->mlx.plane.y = 0.66;
-	// if (cube->mlx.player_start_dir == 'N' || cube->mlx.player_start_dir == 'S')
-	// {
-	// 	if (cube->mlx.player_start_dir == 'N')
-	// 		cube->mlx.plane.y = -0.66;
-	// 	else
-	// 		cube->mlx.plane.y = 0.66;
-	// }
-	// if (cube->mlx.player_start_dir == 'E' || cube->mlx.player_start_dir == 'W')
-	// {
-	// 	if (cube->mlx.player_start_dir == 'E')
-	// 		cube->mlx.plane.x = -0.66;
-	// 	else
-	// 		cube->mlx.plane.x = 0.66;
-	// }
 }

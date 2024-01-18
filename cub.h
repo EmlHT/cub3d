@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:58:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/18 16:34:18 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/18 17:08:49 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ typedef struct s_move
 
 typedef struct xpm
 {
-	t_img	bg;
 	t_img	no;
 	t_img	so;
 	t_img	we;
@@ -172,10 +171,11 @@ void	parse_cube(t_cub *cube);
 void	mlx_main(t_cub *cube);
 void	stock_xpm_images(t_cub *cube);
 void	ft_free_mlx_ptr_cube(t_cub *cube);
-void	draw_walls(t_cub *cube);
+void	render_map(t_cub *cube);
 void	my_mlx_pixel_put(t_img image, int x, int y, unsigned int color);
 t_img	ft_new_image(t_cub *cube, char *img_source);
 void	render_background(t_cub *cube);
+void	draw_texture(t_cub *cube, int x);
 
 /***_________ MOVEMENT KEYS _________***/
 void	ft_movement_left(t_cub *cube);
@@ -184,5 +184,12 @@ void	ft_movement_right(t_cub *cube);
 void	ft_movement_backward(t_cub *cube);
 void	ft_rotate_left(t_cub *cube);
 void	ft_rotate_right(t_cub *cube);
+
+/***_________ RAYCASTING _________***/
+void	calculate_texture_coordinates(t_cub *cube);
+void	calculate_wall_distance(t_cub *cube);
+void	perform_dda_algorithm(t_cub *cube);
+void	init_ray_direction(t_cub *cube);
+void	init_ray(t_cub *cube, int x);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:01:11 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/18 16:01:43 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/18 16:46:56 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_movement_forward(t_cub *cube)
 		cube->mlx.pos.x = movement_x;
 	if (cube->map[(int)movement_y][(int)cube->mlx.pos.x] != '1')
 		cube->mlx.pos.y = movement_y;
-	draw_walls(cube);
+	render_map(cube);
 }
 
 void	ft_movement_backward(t_cub *cube)
@@ -39,7 +39,7 @@ void	ft_movement_backward(t_cub *cube)
 		cube->mlx.pos.x = movement_x;
 	if (cube->map[(int)movement_y][(int)cube->mlx.pos.x] != '1')
 		cube->mlx.pos.y = movement_y;
-	draw_walls(cube);
+	render_map(cube);
 }
 
 void	ft_movement_left(t_cub *cube)
@@ -56,7 +56,7 @@ void	ft_movement_left(t_cub *cube)
 		cube->mlx.pos.x = movement_x;
 	if (cube->map[(int)movement_y][(int)cube->mlx.pos.x] != '1')
 		cube->mlx.pos.y = movement_y;
-	draw_walls(cube);
+	render_map(cube);
 }
 
 void	ft_movement_right(t_cub *cube)
@@ -73,5 +73,5 @@ void	ft_movement_right(t_cub *cube)
 		cube->mlx.pos.x = movement_x;
 	if (cube->map[(int)movement_y][(int)cube->mlx.pos.x] != '1')
 		cube->mlx.pos.y = movement_y;
-	draw_walls(cube);
+	render_map(cube);
 }

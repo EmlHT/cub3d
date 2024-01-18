@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 11:36:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/18 16:01:50 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/18 16:47:05 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_rotate_left(t_cub *cube)
 	cube->mlx.dir.y = old_dir_x * sin(-ROT_SPEED) + cube->mlx.dir.y * cos(-ROT_SPEED);
 	cube->mlx.plane.x = cube->mlx.plane.x * cos(-ROT_SPEED) - cube->mlx.plane.y * sin(-ROT_SPEED);
 	cube->mlx.plane.y = old_plane_x * sin(-ROT_SPEED) + cube->mlx.plane.y * cos(-ROT_SPEED);	
-	draw_walls(cube);
+	render_map(cube);
 }
 
 void	ft_rotate_right(t_cub *cube)
@@ -39,5 +39,5 @@ void	ft_rotate_right(t_cub *cube)
 	cube->mlx.dir.y = old_dir_x * sin(ROT_SPEED) + cube->mlx.dir.y * cos(ROT_SPEED);
 	cube->mlx.plane.x = cube->mlx.plane.x * cos(ROT_SPEED) - cube->mlx.plane.y * sin(ROT_SPEED);
 	cube->mlx.plane.y = old_plane_x * sin(ROT_SPEED) + cube->mlx.plane.y * cos(ROT_SPEED);
-	draw_walls(cube);
+	render_map(cube);
 }
