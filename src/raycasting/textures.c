@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:03:49 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/18 18:09:40 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/18 18:50:20 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,18 @@ int	rgb_to_hex(int red, int green, int blue)
 	return (hex_value);
 }
 
-void	fill_colors(t_cub *cube, int red, int green, int blue)
+int	fill_colors(t_cub *cube, char type)
 {
+	char	**dest;
+	int		res;
 	
+	dest = NULL;
+	if (type == 'c')
+		dest = ft_split(cube->c, ',');
+	else if (type == 'f')
+		dest = ft_split(cube->f, ',');
+	res = rgb_to_hex(ft_atoi(dest[0]), ft_atoi(dest[1]), ft_atoi(dest[2]));
+	return (res);
 }
 
 void	color_ceiling_floor(t_cub *cube)
@@ -31,17 +40,15 @@ void	color_ceiling_floor(t_cub *cube)
     int	j;
 
     i = -1;
-	fill_colors(cube->c_colours->r, cube->c_colours->g, cube->c_colours->b);
-    fill_colors(cube->f_colours->r, cube->f_colours->g, cube->f_colours->b);
 	while (++i < SCREEN_HEIGHT)
     {
         j = -1;
         while (++j < SCREEN_WIDTH)
 		{
 			if (i < SCREEN_HEIGHT / 2)
-				my_mlx_pixel_put(cube->mlx.img, j, i, rgb_to_hex(cube->c_colours->r, cube->c_colours->g, cube->c_colours->b));
+				my_mlx_pixel_put(cube->mlx.img, j, i, fill_colors(cube, 'c'));
 			else
-				my_mlx_pixel_put(cube->mlx.img, j, i, rgb_to_hex(cube->f_colours->r, cube->f_colours->g, cube->f_colours->b));
+				my_mlx_pixel_put(cube->mlx.img, j, i, fill_colors(cube, 'f'));
 		}
     }
 }
