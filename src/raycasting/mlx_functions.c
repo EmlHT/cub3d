@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:20:13 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/18 17:39:30 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/19 08:49:23 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,4 @@ void	render_map(t_cub *cube)
 		draw_texture(cube, x);
     }
 	mlx_put_image_to_window(cube->mlx.ptr, cube->mlx.window, cube->mlx.img.ref, 0, 0);
-}
-
-void	render_background(t_cub *cube)
-{
-    int	i;
-    int	j;
-
-    i = -1;
-    while (++i < SCREEN_HEIGHT)
-    {
-        j = -1;
-        while (++j < SCREEN_WIDTH)
-			my_mlx_pixel_put(cube->mlx.img, j, i, 0x000000);
-    }
 }

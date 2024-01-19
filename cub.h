@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:58:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/18 18:09:05 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/19 08:51:16 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,6 @@ typedef struct s_img
     int		endian;
 }	t_img;
 
-typedef struct s_move
-{
-	double	time;
-	double	oldTime;
-	double	frametime;
-	double	move_speed;
-	double	rot_speed;
-}		t_move;
-
 typedef struct xpm
 {
 	t_img	no;
@@ -122,7 +113,6 @@ typedef struct s_mlx
 	int			height;
 	int			draw_start;
 	int			draw_end;
-	t_move		move;
 }	t_mlx;
 
 typedef struct s_cub
@@ -174,7 +164,6 @@ void	ft_free_mlx_ptr_cube(t_cub *cube);
 void	render_map(t_cub *cube);
 void	my_mlx_pixel_put(t_img image, int x, int y, unsigned int color);
 t_img	ft_new_image(t_cub *cube, char *img_source);
-void	render_background(t_cub *cube);
 void	draw_texture(t_cub *cube, int x);
 
 /***_________ MOVEMENT KEYS _________***/
