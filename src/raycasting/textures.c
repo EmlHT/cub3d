@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
+/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:03:49 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/19 08:47:11 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/19 10:24:47 by ehouot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,19 @@ static unsigned int	get_pixel_color(t_img image, int x, int y)
 	return (*(unsigned int *)color);
 }
 
+static t_img	find_texture_dir(t_cub *cube)
+{
+	if (cube->mlx.side == 1 && cube->mlx.pos.y < cube->mlx.map.y)
+		return (cube->mlx.xpm_img.ea);
+	else if (cube->mlx.side == 1 && cube->mlx.pos.y > cube->mlx.map.y)
+		return (cube->mlx.xpm_img.we);
+	else if (cube->mlx.side == 0 && cube->mlx.pos.x < cube->mlx.map.x)
+		return (cube->mlx.xpm_img.no);
+	else if (cube->mlx.side == 0 && cube->mlx.pos.x > cube->mlx.map.x)
+		return (cube->mlx.xpm_img.so);
+	return (cube->mlx.xpm_img.no);
+}
+
 void	draw_texture(t_cub *cube, int x)
 {
 	int				y;
@@ -63,9 +76,9 @@ void	draw_texture(t_cub *cube, int x)
 	y = cube->mlx.draw_start;
 	while (y < cube->mlx.draw_end)
 	{
-		cube->mlx.tex.y = (int)cube->mlx.tex.pos & TEXTURE_HEIGHT - 1;
+		cube->mlx.tex.y = (int)cube->mlx.tex.pos & (TEXTURE_HEIGHT - 1);
 		cube->mlx.tex.pos += cube->mlx.tex.step;
-		color = get_pixel_color(cube->mlx.xpm_img.no, cube->mlx.tex.x, \
+		color = get_pixel_color(find_texture_dir(cube), cube->mlx.tex.x, \
 		cube->mlx.tex.y);
 		my_mlx_pixel_put(cube->mlx.img, x, y, color);
 		y++;
