@@ -6,14 +6,14 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:16:36 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/12 17:00:33 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/22 12:01:59 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
 void	ft_error_exit(int error_message)
-{	
+{
 	if (error_message == 1)
 		ft_putstr_fd("cub3D: please add a map file as an argument\n", 2);
 	else if (error_message == 2)
@@ -38,7 +38,7 @@ void	print_error_message(int error_message)
 	else if (error_message == 9)
 		ft_putstr_fd("cub3D: colour values should be >= 0 <= 255\n", 2);
 	else if (error_message == 10)
-		ft_putstr_fd("cub3D: not properly closed off by walls/character placement issue\n", 2);
+		ft_putstr_fd("cub3D: wall/character positioning issue\n", 2);
 	else if (error_message == 11)
 		ft_putstr_fd("cub3D: invalid characters present in map\n", 2);
 	else if (error_message == 12)

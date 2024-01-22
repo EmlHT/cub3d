@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 10:20:13 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/19 08:49:23 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/22 12:09:07 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,17 @@ void	render_map(t_cub *cube)
 {
 	int	x;
 
-    x = -1;
+	x = -1;
 	color_ceiling_floor(cube);
-    while (++x < SCREEN_WIDTH)
-    {
-        init_ray(cube, x);
-        init_ray_direction(cube);
+	while (++x < SCREEN_WIDTH)
+	{
+		init_ray(cube, x);
+		init_ray_direction(cube);
 		perform_dda_algorithm(cube);
 		calculate_wall_distance(cube);
 		calculate_texture_coordinates(cube);
 		draw_texture(cube, x);
-    }
-	mlx_put_image_to_window(cube->mlx.ptr, cube->mlx.window, cube->mlx.img.ref, 0, 0);
+	}
+	mlx_put_image_to_window(cube->mlx.ptr, cube->mlx.window, \
+	cube->mlx.img.ref, 0, 0);
 }
