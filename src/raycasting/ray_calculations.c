@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 16:44:25 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/22 12:06:30 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/22 12:27:25 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	init_ray(t_cub *cube, int x)
 {
-	cube->mlx.cameraX = 2 * x / (double)SCREEN_WIDTH - 1;
-	cube->mlx.ray.x = cube->mlx.dir.x + cube->mlx.plane.x * cube->mlx.cameraX;
-	cube->mlx.ray.y = cube->mlx.dir.y + cube->mlx.plane.y * cube->mlx.cameraX;
+	cube->mlx.camera_x = 2 * x / (double)SCREEN_WIDTH - 1;
+	cube->mlx.ray.x = cube->mlx.dir.x + cube->mlx.plane.x * cube->mlx.camera_x;
+	cube->mlx.ray.y = cube->mlx.dir.y + cube->mlx.plane.y * cube->mlx.camera_x;
 	cube->mlx.map.x = (int)cube->mlx.pos.x;
 	cube->mlx.map.y = (int)cube->mlx.pos.y;
 	if (cube->mlx.ray.x == 0)

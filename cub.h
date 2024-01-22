@@ -6,11 +6,11 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:58:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/22 08:58:42 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/22 12:28:55 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	CUB_H
+#ifndef CUB_H
 # define CUB_H
 
 # include <unistd.h>
@@ -44,7 +44,8 @@ enum	e_elem
 	C,		// --> 4
 	F,		// --> 5
 };
-typedef	struct s_colours
+
+typedef struct s_colours
 {
 	int	r;
 	int	g;
@@ -65,12 +66,12 @@ typedef struct s_pos
 
 typedef struct s_img
 {
-    void	*ref;
-    char	*addr;
+	void	*ref;
+	char	*addr;
 	t_pos	size;
-    int		bpp;
-    int		line_len;
-    int		endian;
+	int		bpp;
+	int		line_len;
+	int		endian;
 }	t_img;
 
 typedef struct s_xpm
@@ -104,7 +105,7 @@ typedef struct s_mlx
 	t_vector	delta_dist;
 	t_pos		map;
 	t_pos		step;
-	double		cameraX;
+	double		camera_x;
 	double		perp_wall_dist;
 	double		wall_x;
 	t_tex		tex;
@@ -131,7 +132,7 @@ typedef struct s_cub
 
 /***_________ PARSING _________***/
 void	parsing_main(int argc, char **argv, t_cub *cube);
-void    parse_map(t_cub *cube);
+void	parse_map(t_cub *cube);
 void	parse_cube(t_cub *cube);
 void	check_colour_values(t_cub *cube);
 bool	allocate_line(char *line, t_cub *cube, bool elem_fill);
