@@ -6,7 +6,7 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:03:49 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/22 09:07:12 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/22 12:51:48 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ static unsigned int	get_pixel_color(t_img image, int x, int y)
 
 static t_img	find_texture_dir(t_cub *cube)
 {
-	if (cube->mlx.side == 1 && cube->mlx.pos.y < cube->mlx.map.y)
+	if (cube->mlx.side == 0 && cube->mlx.pos.x < cube->mlx.map.x)
 		return (cube->mlx.xpm_img.ea);
-	else if (cube->mlx.side == 1 && cube->mlx.pos.y > cube->mlx.map.y)
-		return (cube->mlx.xpm_img.we);
-	else if (cube->mlx.side == 0 && cube->mlx.pos.x < cube->mlx.map.x)
-		return (cube->mlx.xpm_img.no);
 	else if (cube->mlx.side == 0 && cube->mlx.pos.x > cube->mlx.map.x)
+		return (cube->mlx.xpm_img.we);
+	else if (cube->mlx.side == 1 && cube->mlx.pos.y > cube->mlx.map.y)
+		return (cube->mlx.xpm_img.no);
+	else if (cube->mlx.side == 1 && cube->mlx.pos.y < cube->mlx.map.y)
 		return (cube->mlx.xpm_img.so);
 	return (cube->mlx.xpm_img.no);
 }
