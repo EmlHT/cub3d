@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:11:41 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/08 17:08:058 by ehouot           ###   ########.fr       */
+/*   Updated: 2024/01/22 09:00:11 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ static void	cub_file_extension_check(char *arg)
 	arg_len = ft_strlen(arg);
 	if (arg_len <= 4)
 		ft_error_exit(4);
-	if (arg[arg_len - 1] != 'b' && arg[arg_len - 2] != 'u' && arg[arg_len - 3] != 'c' \
-		&& arg[arg_len - 4] != '.')
+	if (arg[arg_len - 1] != 'b' && arg[arg_len - 2] != 'u' \
+	&& arg[arg_len - 3] != 'c' && arg[arg_len - 4] != '.')
 		ft_error_exit(4);
 }
 
@@ -74,39 +74,16 @@ static void	file_check(char *file)
 	close(fd);
 }
 
-static void	ft_initialise_cube(char *file, t_cub *cube)
-{
-	cube->i = 0;
-	cube->no = NULL;
-	cube->so = NULL;
-	cube->we = NULL;
-	cube->ea = NULL;
-	cube->c = NULL;
-	cube->f = NULL;
-	cube->c_colours = NULL;
-	cube->f_colours = NULL;
-	cube->map = ft_calloc(1, sizeof(char *));
-	if (!cube->map)
-	{
-		ft_putstr_fd("cub3D: malloc error\n", 2);
-		return ;
-	}
-	file_parsing(file, cube);
-}
-
 void	parsing_main(int argc, char **argv, t_cub *cube)
 {
 	if (argc != 2)
 		ft_error_exit(1);
 	file_check(argv[1]);
 	cub_file_extension_check(argv[1]);
-	ft_initialise_cube(argv[1], cube);
+	ft_initialise_cube(cube);
+	file_parsing(argv[1], cube);
 	if (!check_cube_elements(cube))
 		ft_free_exit(0, cube);
 	parse_cube(cube);
 	parse_map(cube);
 }
-
-	// print_elements(cube);
-	// print_colours(cube);
-	// print_map(cube);

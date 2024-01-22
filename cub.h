@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehouot <ehouot@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:58:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/19 09:43:10 by ehouot           ###   ########.fr       */
+/*   Updated: 2024/01/22 08:58:42 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ typedef struct s_vector
 {
 	double	x;
 	double	y;
-}		t_vector;
+}	t_vector;
 
 typedef struct s_pos
 {
 	int	x;
 	int	y;
-}		t_pos;
+}	t_pos;
 
 typedef struct s_img
 {
@@ -117,7 +117,6 @@ typedef struct s_mlx
 
 typedef struct s_cub
 {
-	int			i;
 	char		*no;
 	char		*so;
 	char		*we;
@@ -130,12 +129,19 @@ typedef struct s_cub
 	t_mlx		mlx;
 }	t_cub;
 
+/***_________ PARSING _________***/
 void	parsing_main(int argc, char **argv, t_cub *cube);
+void    parse_map(t_cub *cube);
+void	parse_cube(t_cub *cube);
+void	check_colour_values(t_cub *cube);
 bool	allocate_line(char *line, t_cub *cube, bool elem_fill);
+char	*get_elem_value(enum e_elem elem);
+
+/***_________ MISC _________***/
+void	ft_initialise_cube(t_cub *cube);
 void	ft_error_exit(int error_message);
 void	ft_free_exit(int error_message, t_cub *cube);
 void	ft_printf_map_error(char *element, bool *error);
-char	*get_elem_value(enum e_elem elem);
 void	init_coordinates(t_cub *cube);
 
 /***_________ GET_NEXT_LINE _________***/
@@ -152,10 +158,6 @@ void	ft_arrayfree(char **array);
 void	print_elements(t_cub *cube);
 void	print_map(t_cub *cube);
 void	print_colours(t_cub *cube);
-
-/***_________ PARSING _________***/
-void    parse_map(t_cub *cube);
-void	parse_cube(t_cub *cube);
 
 /***_________ MLX FUNCTIONS _________***/
 void	mlx_main(t_cub *cube);
