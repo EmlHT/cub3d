@@ -6,13 +6,11 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 16:22:47 by ehouot            #+#    #+#             */
-/*   Updated: 2024/01/12 16:05:01 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/22 08:52:52 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-
-// Chaque map doit avoir 0, 1, et un N ou S ou E ou W
 
 static bool	is_valid_char(char c)
 {
@@ -27,7 +25,7 @@ static bool	check_wrong_char(char **map)
 	int	x;
 
 	y = -1;
-	while(map[++y])
+	while (map[++y])
 	{
 		x = -1;
 		while (map[y][++x])
@@ -47,7 +45,7 @@ static bool	check_player_loc(char **map, t_cub *cube)
 
 	y = -1;
 	check_loc = 0;
-	while(map[++y])
+	while (map[++y])
 	{
 		x = -1;
 		while (map[y][++x])
@@ -67,27 +65,28 @@ static bool	check_player_loc(char **map, t_cub *cube)
 	return (true);
 }
 
-static bool	check_map_closed(char **map)
+static bool	check_map_closed(char **map, int x, int y)
 {
-	int	y;
-	int	x;
-
 	y = -1;
-	while(map[++y])
+	while (map[++y])
 	{
 		x = -1;
 		while (map[y][++x])
 		{
 			if (map[y][x] == '0' || map[y][x] == 'N' || map[y][x] == 'S' \
-				|| map[y][x] == 'E' || map[y][x] == 'W')
+			|| map[y][x] == 'E' || map[y][x] == 'W')
 			{
-				if (!is_valid_char(map[y - 1][x]) || !is_valid_char(map[y - 1][x + 1]))
+				if (!is_valid_char(map[y - 1][x]) \
+				|| !is_valid_char(map[y - 1][x + 1]))
 					return (false);
-				if (!is_valid_char(map[y + 1][x]) || !is_valid_char(map[y + 1][x - 1]))
+				if (!is_valid_char(map[y + 1][x]) \
+				|| !is_valid_char(map[y + 1][x - 1]))
 					return (false);
-				if (!is_valid_char(map[y][x - 1]) || !is_valid_char(map[y - 1][x - 1]))
+				if (!is_valid_char(map[y][x - 1]) \
+				|| !is_valid_char(map[y - 1][x - 1]))
 					return (false);
-				if (!is_valid_char(map[y][x + 1]) || !is_valid_char(map[y + 1][x + 1]))
+				if (!is_valid_char(map[y][x + 1]) \
+				|| !is_valid_char(map[y + 1][x + 1]))
 					return (false);
 			}
 		}
@@ -95,12 +94,17 @@ static bool	check_map_closed(char **map)
 	return (true);
 }
 
-void    parse_map(t_cub *cube)
+void	parse_map(t_cub *cube)
 {
+	int	x;
+	int	y;
+
+	y = -1;
+	x = -1;
 	if (!check_wrong_char(cube->map))
 		ft_free_exit(11, cube);
-	if (!check_map_closed(cube->map))
-        ft_free_exit(10, cube);
+	if (!check_map_closed(cube->map, x, y))
+		ft_free_exit(10, cube);
 	if (!check_player_loc(cube->map, cube))
 		ft_free_exit(12, cube);
 }

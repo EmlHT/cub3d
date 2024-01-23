@@ -6,11 +6,11 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:58:55 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/18 17:08:49 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/22 12:28:55 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	CUB_H
+#ifndef CUB_H
 # define CUB_H
 
 # include <unistd.h>
@@ -44,7 +44,8 @@ enum	e_elem
 	C,		// --> 4
 	F,		// --> 5
 };
-typedef	struct s_colours
+
+typedef struct s_colours
 {
 	int	r;
 	int	g;
@@ -55,34 +56,25 @@ typedef struct s_vector
 {
 	double	x;
 	double	y;
-}		t_vector;
+}	t_vector;
 
 typedef struct s_pos
 {
 	int	x;
 	int	y;
-}		t_pos;
+}	t_pos;
 
 typedef struct s_img
 {
-    void	*ref;
-    char	*addr;
+	void	*ref;
+	char	*addr;
 	t_pos	size;
-    int		bpp;
-    int		line_len;
-    int		endian;
+	int		bpp;
+	int		line_len;
+	int		endian;
 }	t_img;
 
-typedef struct s_move
-{
-	double	time;
-	double	oldTime;
-	double	frametime;
-	double	move_speed;
-	double	rot_speed;
-}		t_move;
-
-typedef struct xpm
+typedef struct s_xpm
 {
 	t_img	no;
 	t_img	so;
@@ -113,7 +105,7 @@ typedef struct s_mlx
 	t_vector	delta_dist;
 	t_pos		map;
 	t_pos		step;
-	double		cameraX;
+	double		camera_x;
 	double		perp_wall_dist;
 	double		wall_x;
 	t_tex		tex;
@@ -122,12 +114,10 @@ typedef struct s_mlx
 	int			height;
 	int			draw_start;
 	int			draw_end;
-	t_move		move;
 }	t_mlx;
 
 typedef struct s_cub
 {
-	int			i;
 	char		*no;
 	char		*so;
 	char		*we;
@@ -140,12 +130,19 @@ typedef struct s_cub
 	t_mlx		mlx;
 }	t_cub;
 
+/***_________ PARSING _________***/
 void	parsing_main(int argc, char **argv, t_cub *cube);
+void	parse_map(t_cub *cube);
+void	parse_cube(t_cub *cube);
+void	check_colour_values(t_cub *cube);
 bool	allocate_line(char *line, t_cub *cube, bool elem_fill);
+char	*get_elem_value(enum e_elem elem);
+
+/***_________ MISC _________***/
+void	ft_initialise_cube(t_cub *cube);
 void	ft_error_exit(int error_message);
 void	ft_free_exit(int error_message, t_cub *cube);
 void	ft_printf_map_error(char *element, bool *error);
-char	*get_elem_value(enum e_elem elem);
 void	init_coordinates(t_cub *cube);
 
 /***_________ GET_NEXT_LINE _________***/
@@ -163,10 +160,6 @@ void	print_elements(t_cub *cube);
 void	print_map(t_cub *cube);
 void	print_colours(t_cub *cube);
 
-/***_________ PARSING _________***/
-void    parse_map(t_cub *cube);
-void	parse_cube(t_cub *cube);
-
 /***_________ MLX FUNCTIONS _________***/
 void	mlx_main(t_cub *cube);
 void	stock_xpm_images(t_cub *cube);
@@ -174,7 +167,6 @@ void	ft_free_mlx_ptr_cube(t_cub *cube);
 void	render_map(t_cub *cube);
 void	my_mlx_pixel_put(t_img image, int x, int y, unsigned int color);
 t_img	ft_new_image(t_cub *cube, char *img_source);
-void	render_background(t_cub *cube);
 void	draw_texture(t_cub *cube, int x);
 
 /***_________ MOVEMENT KEYS _________***/
@@ -191,5 +183,6 @@ void	calculate_wall_distance(t_cub *cube);
 void	perform_dda_algorithm(t_cub *cube);
 void	init_ray_direction(t_cub *cube);
 void	init_ray(t_cub *cube, int x);
+void	color_ceiling_floor(t_cub *cube);
 
 #endif

@@ -12,7 +12,8 @@ SRC		        =	${addprefix ${SRC_PATH},	main.c \
 												parsing/parsing_map.c \
 												parsing/init_map_elements.c \
 												parsing/array_manipulations.c \
-												parsing/parsing_elements.c \
+												parsing/parsing_textures.c \
+												parsing/parsing_colours.c \
 												raycasting/init_coordinates.c \
 												raycasting/ray_calculations.c \
 												raycasting/mlx_main.c \

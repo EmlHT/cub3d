@@ -1,4 +1,7 @@
 # Visual Studio Code # 
 .vscode/*
+<<<<<<< HEAD
 minilibx-linux
+=======
+>>>>>>> brett
 .DS_Store

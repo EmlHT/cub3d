@@ -6,41 +6,45 @@
 /*   By: brettleclerc <brettleclerc@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:00:56 by brettlecler       #+#    #+#             */
-/*   Updated: 2024/01/18 16:40:28 by brettlecler      ###   ########.fr       */
+/*   Updated: 2024/01/22 12:22:01 by brettlecler      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
+static void	allot_dir_values(t_cub *cube, double x, double y)
+{
+	cube->mlx.dir.x = x;
+	cube->mlx.dir.y = y;
+}
+
+static void	allot_plane_values(t_cub *cube, double x, double y)
+{
+	cube->mlx.plane.x = x;
+	cube->mlx.plane.y = y;
+}
+
 static void	retrieve_direction(t_cub *cube)
 {
 	if (cube->mlx.player_start_dir == 'N')
 	{
-		cube->mlx.dir.x = 0;
-		cube->mlx.dir.y = -1;
-		cube->mlx.plane.x = 0.66;
-		cube->mlx.plane.y = 0;
+		allot_dir_values(cube, 0, -1);
+		allot_plane_values(cube, 0.66, 0);
 	}
 	else if (cube->mlx.player_start_dir == 'S')
 	{
-		cube->mlx.dir.x = 0;
-		cube->mlx.dir.y = 1;
-		cube->mlx.plane.x = -0.66;
-		cube->mlx.plane.y = 0;
+		allot_dir_values(cube, 0, 1);
+		allot_plane_values(cube, -0.66, 0);
 	}
 	else if (cube->mlx.player_start_dir == 'W')
 	{
-		cube->mlx.dir.x = -1;
-		cube->mlx.dir.y = 0;
-		cube->mlx.plane.x = 0;
-		cube->mlx.plane.y = -0.66;
+		allot_dir_values(cube, -1, 0);
+		allot_plane_values(cube, 0, -0.66);
 	}
 	else if (cube->mlx.player_start_dir == 'E')
 	{
-		cube->mlx.dir.x = 1;
-		cube->mlx.dir.y = 0;
-		cube->mlx.plane.x = 0;
-		cube->mlx.plane.y = 0.66;
+		allot_dir_values(cube, 1, 0);
+		allot_plane_values(cube, 0, 0.66);
 	}
 }
 
@@ -50,7 +54,7 @@ static void	retrieve_position(t_cub *cube)
 	int	x;
 
 	y = -1;
-	while(cube->map[++y])
+	while (cube->map[++y])
 	{
 		x = -1;
 		while (cube->map[y][++x])
